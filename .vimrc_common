@@ -121,6 +121,7 @@ nmap ,cw :botright cwindow<cr>
 nmap ,cl :ccl<cr>
 nmap ,cf :cs find s <C-R>=expand("<cword>")<CR><CR>
 nmap ,@ "zyy:@z<CR>
+nmap ,ie /,\n\s*}<CR>
 "nnoremap <C-H> (
 nnoremap <C-N> }
 nnoremap <C-P> {
@@ -237,6 +238,7 @@ command! -nargs=1 SmartGrep :call s:SmartGrep(<q-args>)
 cab sgrep SmartGrep
 nmap <leader>gr :SmartGrep <C-R>=expand('<cword>')<CR><CR>
 vmap <leader>gr "zy:SmartGrep <C-R>=getreg('z')<CR><CR>
+let g:smartGrep_rules = []
 function! s:SmartGrep(pattern)
 	let curfile = bufname('%')
 	let dir = "**/*." . expand("%:t:e")
