@@ -1,0 +1,312 @@
+"Pathogen needs to loaded before any other plugins and settings
+call pathogen#runtime_append_all_bundles()
+
+"===GENERAL SETTINGS===
+set t_Co=256
+set number
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
+"set expandtab
+set backspace=2
+set statusline=\ %F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l/%L:%c
+set laststatus=2
+set ruler
+set autoread
+set incsearch
+set ignorecase smartcase
+set autoindent
+set smartindent
+"set cindent
+set cinkeys=0{,0},!^F,o,O,e " default is: 0{,0},0),:,0#,!^F,o,O,e
+set iskeyword=a-z,A-Z,48-57,_
+set history=1000
+"buffer setting
+set switchbuf=useopen,usetab
+"leave a buffer with saving
+set hidden 
+set wildchar=<Tab> wildmenu wildmode=full
+:filetype plugin on 
+:filetype indent on
+:syntax on
+"cscope
+set cscopequickfix=s-,c-,d-,i-,t-,e-
+if filereadable("cscope.out")
+    cs add cscope.out
+endif
+
+"====COLOR SCHEME====
+let g:CSApprox_loaded = 1
+let g:CSApprox_verbose_level = 0
+if has("gui_running")
+    colorscheme desert
+else
+	colorscheme desert256
+endif
+
+"====FILETYPE SETTING===
+autocmd BufReadPost *
+\ if line("'\"") > 0 && line ("'\"") <= line("$") |
+\   exe "normal g'\"" |
+\ endif
+
+autocmd BufRead *.cu setf cpp 
+autocmd BufRead *.cuh setf cpp 
+autocmd BufRead *.m setf objc
+autocmd BufRead *.doctest setf python
+autocmd BufNewFile,BufRead *.as setf actionscript
+
+
+autocmd BufWritePost *.sh silent !chmod +x %
+autocmd BufWritePost *.pl silent !chmod +x %
+
+if &term=="xterm"
+     set t_Co=8
+     set t_Sb=[4%dm
+     set t_Sf=[3%dm
+endif
+
+if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
+   set fileencodings=utf-8,latin1
+endif
+
+"=====KEY MAPPING===
+let mapleader = ","
+nnoremap s ;
+nnoremap S ,
+imap <S-CR> <ESC>
+vmap <S-CR> <ESC>
+imap <C-B> <C-O>b
+imap <C-F> <C-O>w
+imap <C-H> <C-O>h
+imap <C-J> <C-O>j
+imap <C-K> <C-O>k
+imap <C-L> <C-O>l
+imap <C-A> <C-O>^
+imap <C-E> <C-O>$
+imap <C-S> <C-O>dw
+imap <C-D> <C-O>x
+inoremap # X<BS>#
+nmap ,xx :qa!<CR>
+nmap j gj
+nmap k gk
+nmap ,te :tabnew<cr>
+nmap ,tc :tabclose<cr>
+nmap ,tn :tabn<cr>
+nmap ,tp :tabp<cr>
+nmap ,bn :bnext<cr>
+nmap ,bp :bprev<cr>
+nmap ,en :enew<cr>
+nmap ,, :b#<cr>
+nmap ,sb :sb#<cr>
+nmap ,vs :vertical sb#<cr>
+nmap ,wj <C-W>j
+nmap ,wk <C-W>k
+nmap ,wh <C-W>h
+nmap ,wl <C-W>l
+nmap ,w] <C-W>]
+nmap ,wg] <C-W>g]
+nmap ,J <C-W>J
+nmap ,K <C-W>K
+nmap ,H <C-W>H
+nmap ,L <C-W>L
+nmap ,wc :bd!<cr>
+nmap ,we <C-W>=
+nmap ,so :source %<CR>
+nmap ,hl :let &hlsearch=1-&hlsearch<CR>
+nmap ,ma :make<cr>
+nmap ,cn :cnext<cr>
+nmap ,cp :cprev<cr>
+nmap ,cw :botright cwindow<cr>
+nmap ,cl :ccl<cr>
+nmap ,cf :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap ,@ "zyy:@z<CR>
+"nnoremap <C-H> (
+nnoremap <C-N> }
+nnoremap <C-P> {
+nnoremap <C-L> )
+nnoremap ( [(
+nnoremap ) ])
+nnoremap { [{
+nnoremap } ]}
+nnoremap <C-J> 5j
+nnoremap <C-K> 5k
+nnoremap <C-]> g<C-]>
+"vnoremap <C-H> (
+vnoremap <C-N> }
+vnoremap <C-P> {
+vnoremap <C-L> )
+vnoremap ( [(
+vnoremap ) ])
+vnoremap { [{
+vnoremap } ]}
+vnoremap <C-J> 5j
+vnoremap <C-K> 5k
+
+cmap <C-h> <LEFT>
+cmap <C-k> <UP>
+cmap <C-j> <DOWN>
+cmap <C-l> <RIGHT>
+cmap <C-B> <C-LEFT>
+cmap <C-F> <C-RIGHT>
+cmap <C-A> <HOME>
+cmap <C-E> <END>
+cmap <S-CR> <C-U><ESC>
+cmap <C-V> <C-R><C-W>
+cab erc :tabe ~/.vimrc<cr>
+cab src :source ~/.vimrc<cr>
+cab sobjc source ~/.vim/mode/objc-dev.vim
+cab fhtml setf html
+cab fjs setf javascript
+cab vsb vertical sb
+cab res resize
+cab vres vertical resize
+cab te tabe
+cab cwd lcd %:p:h
+cab cf :cs find 
+cab ses mksession! session.vim
+cab seo source session.vim
+
+
+"====Plugin Settings=====
+"-taglist-
+let Tlist_Ctags_Cmd = "/usr/local/bin/ctags"
+let Tlist_File_Fold_Auto_Close = 1
+let Tlist_Use_Right_Window = 1
+let Tlist_Show_One_File = 1
+let tlist_objc_settings = 'objc;c:class;p:protocol;m:instance method;M:class method;P:protocol'
+let tlist_actionscript_settings = 'actionscript;c:class;f:method;p:property;v:variable'
+nmap ;a :TlistToggle<CR>
+cab ct silent !/usr/bin/ctags --langmap='c++:+.cu.cuh' *
+"-NERDTree-
+nmap <leader>nd :NERDTreeToggle<CR>
+nmap <leader>nf :NERDTreeFind<CR>
+"-fuzzyFinder-
+nmap ;s :FuzzyFinderBuffer<CR>
+nmap ;d :FuzzyFinderFileWithCurrentBufferDir<CR>
+nmap ;f :FuzzyFinderUserFile<CR>
+nmap ;t :FuzzyFinderTag<CR>
+nmap ;g :let g:FuzzyFinderOptions.TagInFile.filename = expand('%')<CR>:FuzzyFinderTagInFile<CR>
+nmap ;h :FuzzyFinderBookmark<CR>
+nmap ;m :FuzzyFinderAddBookmark<CR><CR>
+if !exists("g:FuzzyFinderOptions")
+	let g:FuzzyFinderOptions = {'UserFile':{}, 'Base':{}, 'Buffer':{}, 'Tag':{}, 'TagInFile':{}}
+endif
+let g:FuzzyFinderOptions.Base.key_next_mode      = '<C-i>'
+let g:FuzzyFinderOptions.Base.key_prev_mode      = '<C-o>'
+let g:FuzzyFinderOptions.Base.enumerating_limit = 15
+let g:FuzzyFinderOptions.Buffer.switch_order = 10
+let g:FuzzyFinderOptions.UserFile.switch_order = 15
+let g:FuzzyFinderOptions.TagInFile.switch_order = 70
+let g:FuzzyFinderOptions.Tag.switch_order = 75 
+let g:FuzzyFinderOptions.TagInFile.ctags = '/usr/local/bin/ctags'
+
+"-neo complete
+let g:NeoComplCache_CachingDisablePattern = ''
+let g:NeoComplCache_MaxList = 20
+let g:NeoComplCache_DisablePluginList = {'include_complete' : 1, 'filename_complete' : 1}
+let g:NeoComplCache_EnableQuickMatch = 0
+
+"Perl Settings
+let perl_fold = 1
+let perl_nofold_packages = 1
+
+"Python Settings
+let pydoc_highlight = 0
+
+inoremap <C-]> <ESC>:call g:show_func_arg()<CR>a
+nmap ,fi :call g:show_func_arg()<CR>
+nmap ,fc :call g:close_func_arg_win()<CR>
+
+"====USER DEFINED FUNCTION===
+command! -nargs=1 SearchCurrentFile :call s:SearchCurrentFile(<q-args>)
+command! -nargs=0 ReloadSnip :call s:ReloadSnip()
+cab scf SearchCurrentFile
+
+function! s:SearchCurrentFile(pattern)
+	let searchcmd = 'vimgrep '. a:pattern . ' ' . expand("%")
+	exec searchcmd
+endfunction
+
+function! s:ReloadSnip()
+	call ResetSnippets()
+	call GetSnippets(g:snippets_dir, &ft)
+endfunction
+
+command! -nargs=1 SmartGrep :call s:SmartGrep(<q-args>)
+cab sgrep SmartGrep
+nmap <leader>gr :SmartGrep <C-R>=expand('<cword>')<CR><CR>
+vmap <leader>gr "zy:SmartGrep <C-R>=getreg('z')<CR><CR>
+function! s:SmartGrep(pattern)
+	let curfile = bufname('%')
+	let dir = "**/*." . expand("%:t:e")
+	for rule in g:smartGrep_rules
+		if curfile =~ rule[0]
+			let dir = rule[1]
+			break
+		endif
+	endfor
+	let grepcmd = 'silent grep ' . a:pattern . ' ' . dir
+	exec grepcmd
+	exec 'botright cwindow'
+	exec 'redraw!'
+endfunction
+
+"hex
+if has('Python')
+    nmap ,h :call HexValueInfo()<CR>
+endif
+
+function! HexValueInfo()
+python <<EOF
+    import vim, re, struct
+    val = vim.eval('expand("<cword>")')
+    val = eval(val)
+    fval = struct.unpack('f', struct.pack("I", val))[0]
+    #add comma to decimal value
+    dval = str(val)
+    dval = dval[::-1]
+    dval = re.sub(r'(\d\d\d)(?=\d)',r'\1,',dval)
+    dval = dval[::-1]
+    print "val: 0x%x/%s/%g" % (val, dval, fval)
+EOF
+endfunction
+
+"indent text object
+onoremap <silent>an :<C-u>cal IndTxtObj(0)<CR>
+onoremap <silent>in :<C-u>cal IndTxtObj(1)<CR>
+vnoremap <silent>an :<C-u>cal IndTxtObj(0)<CR><Esc>gv
+vnoremap <silent>in :<C-u>cal IndTxtObj(1)<CR><Esc>gv
+
+function! IndTxtObj(inner)
+  let curline = line(".")
+  let lastline = line("$")
+  let i = indent(line(".")) - &shiftwidth * (v:count1 - 1)
+  let i = i < 0 ? 0 : i
+  if getline(".") =~ "^\\s*$"
+    return
+  endif
+  let p = line(".") - 1
+  let nextblank = getline(p) =~ "^\\s*$"
+  while p > 0 && (nextblank || indent(p) >= i )
+    -
+    let p = line(".") - 1
+    let nextblank = getline(p) =~ "^\\s*$"
+  endwhile
+  if (!a:inner)
+    -
+  endif
+  normal! 0V
+  call cursor(curline, 0)
+  let p = line(".") + 1
+  let nextblank = getline(p) =~ "^\\s*$"
+  while p <= lastline && (nextblank || indent(p) >= i )
+    +
+    let p = line(".") + 1
+    let nextblank = getline(p) =~ "^\\s*$"
+  endwhile
+  if (!a:inner)
+    +
+  endif
+  normal! $
+endfunction

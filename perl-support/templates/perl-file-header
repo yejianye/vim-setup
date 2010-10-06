@@ -1,0 +1,20 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use Getopt::Long;
+
+my $usage = "
+Usage: |FILENAME| 
+Description: |CURSOR|
+";
+
+my $help = 0;
+GetOptions("help", \$help);
+
+if ($help) {
+    print $usage;
+    exit 1;
+}
+
+
