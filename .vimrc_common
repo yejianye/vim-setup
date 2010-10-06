@@ -203,10 +203,9 @@ let g:FuzzyFinderOptions.Tag.switch_order = 75
 let g:FuzzyFinderOptions.TagInFile.ctags = '/usr/local/bin/ctags'
 
 "-neo complete
-let g:NeoComplCache_CachingDisablePattern = ''
-let g:NeoComplCache_MaxList = 20
-let g:NeoComplCache_DisablePluginList = {'include_complete' : 1, 'filename_complete' : 1}
-let g:NeoComplCache_EnableQuickMatch = 0
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_max_list = 20
+let g:neocomplcache_plugin_disable = {'include_complete' : 1, 'filename_complete' : 1}
 
 "Perl Settings
 let perl_fold = 1
