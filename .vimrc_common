@@ -207,6 +207,14 @@ let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_max_list = 20
 let g:neocomplcache_plugin_disable = {'include_complete' : 1, 'filename_complete' : 1}
 
+"-snipMate
+nmap ,rs :call ReloadAllSnippets()<CR>
+nmap ,es :call EditSnippet(&ft)<CR>
+
+function! EditSnippet(ft)
+	exec "vsp ~/.vim/bundle/snipMate/snippets/" . a:ft . ".snippets"
+endfunction
+
 "Perl Settings
 let perl_fold = 1
 let perl_nofold_packages = 1
