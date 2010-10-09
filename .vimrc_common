@@ -3,7 +3,11 @@ call pathogen#runtime_append_all_bundles()
 
 "===GENERAL SETTINGS===
 set t_Co=256
-set number
+if v:version < 703
+	set rnu
+else 
+	set number
+endif
 set shiftwidth=4
 set tabstop=4
 set softtabstop=4
@@ -87,6 +91,8 @@ imap <C-E> <C-O>$
 imap <C-S> <C-O>dw
 imap <C-D> <C-O>x
 inoremap # X<BS>#
+nmap ,nu :set number<CR>
+nmap ,rn :set rnu<CR>
 nmap ,xx :qa!<CR>
 nmap j gj
 nmap k gk
@@ -182,6 +188,14 @@ cab ct silent !/usr/bin/ctags --langmap='c++:+.cu.cuh' *
 "-NERDTree-
 nmap <leader>nd :NERDTreeToggle<CR>
 nmap <leader>nf :NERDTreeFind<CR>
+"-NERDCommenter-
+let g:NERDCreateDefaultMappings = 0
+nmap <leader>cc <plug>NERDCommenterComment
+vmap <leader>cc <plug>NERDCommenterComment
+nmap <leader>cu <plug>NERDCommenterUncomment
+vmap <leader>cu <plug>NERDCommenterUncomment
+nmap <leader>c<space> <plug>NERDCommenterToggle
+vmap <leader>c<space> <plug>NERDCommenterToggle
 "-fuzzyFinder-
 nmap ;s :FuzzyFinderBuffer<CR>
 nmap ;d :FuzzyFinderFileWithCurrentBufferDir<CR>
