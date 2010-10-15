@@ -4,9 +4,9 @@ call pathogen#runtime_append_all_bundles()
 "===GENERAL SETTINGS===
 set t_Co=256
 if v:version < 703
-	set rnu
-else 
 	set number
+else 
+	set relativenumber
 endif
 set shiftwidth=4
 set tabstop=4
@@ -136,8 +136,8 @@ nnoremap ( [(
 nnoremap ) ])
 nnoremap { [{
 nnoremap } ]}
-nnoremap <C-J> 5j
-nnoremap <C-K> 5k
+nnoremap <C-J> 10j
+nnoremap <C-K> 10k
 nnoremap <C-]> g<C-]>
 "vnoremap <C-H> (
 vnoremap <C-N> }
@@ -147,8 +147,8 @@ vnoremap ( [(
 vnoremap ) ])
 vnoremap { [{
 vnoremap } ]}
-vnoremap <C-J> 5j
-vnoremap <C-K> 5k
+vnoremap <C-J> 10j
+vnoremap <C-K> 10k
 
 cmap <C-h> <LEFT>
 cmap <C-k> <UP>
@@ -242,17 +242,12 @@ nmap ,fc :call g:close_func_arg_win()<CR>
 
 "====USER DEFINED FUNCTION===
 command! -nargs=1 SearchCurrentFile :call s:SearchCurrentFile(<q-args>)
-command! -nargs=0 ReloadSnip :call s:ReloadSnip()
-cab scf SearchCurrentFile
+nmap <leader>* :SearchCurrentFile <C-R>=expand('<cword>')<CR><CR>
+vmap <leader>* "zy:SearchCurrentFile <C-R>=getreg('z')<CR><CR>
 
 function! s:SearchCurrentFile(pattern)
 	let searchcmd = 'vimgrep '. a:pattern . ' ' . expand("%")
 	exec searchcmd
-endfunction
-
-function! s:ReloadSnip()
-	call ResetSnippets()
-	call GetSnippets(g:snippets_dir, &ft)
 endfunction
 
 command! -nargs=1 SmartGrep :call s:SmartGrep(<q-args>)

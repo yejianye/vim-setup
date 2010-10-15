@@ -35,9 +35,11 @@ function! s:function_argument(funcname)
 			" create buffer and window
 			topleft sp __funcarg__
 			set buftype=nofile
+			set winfixheight
 		else
 			" create window
 			topleft sb __funcarg__
+			set winfixheight
 		endif
 	else
 		exec funcarg_win . 'wincmd w'
