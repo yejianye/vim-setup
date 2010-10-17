@@ -215,6 +215,7 @@ let g:FuzzyFinderOptions.UserFile.switch_order = 15
 let g:FuzzyFinderOptions.TagInFile.switch_order = 70
 let g:FuzzyFinderOptions.Tag.switch_order = 75 
 let g:FuzzyFinderOptions.TagInFile.ctags = '/usr/local/bin/ctags'
+let g:FuzzyFinderOptions.UserFile.filename = './tag_files'
 
 "-neo complete
 let g:neocomplcache_enable_at_startup = 1
@@ -228,6 +229,9 @@ nmap ,es :call EditSnippet(&ft)<CR>
 function! EditSnippet(ft)
 	exec "vsp ~/.vim/bundle/snipMate/snippets/" . a:ft . ".snippets"
 endfunction
+
+"-TAssert
+let g:TLOG='Decho'
 
 "Perl Settings
 let perl_fold = 1
