@@ -1,0 +1,5 @@
+.netrwhist
+tag_files
+session.vim
+bundle/*/doc/tags*
+doc/tags*
