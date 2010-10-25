@@ -226,6 +226,8 @@ let g:neocomplcache_plugin_disable = {'include_complete' : 1, 'filename_complete
 nmap ,rs :call ReloadAllSnippets()<CR>
 nmap ,es :call EditSnippet(&ft)<CR>
 
+autocmd BufWritePost *.snippets call ReloadAllSnippets()
+
 function! EditSnippet(ft)
 	exec "vsp ~/.vim/bundle/snipMate/snippets/" . a:ft . ".snippets"
 endfunction
