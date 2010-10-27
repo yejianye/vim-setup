@@ -1,0 +1,6 @@
+In your ~/.vimrc add the following line to enable all the settings in this repo
+source ~/.vim/.vimrc_common
+
+Requirements:
+The vim should be version 7.2 or above. And compiled with at least the following flags:
+--enable-pythoninterp --with-features=big
