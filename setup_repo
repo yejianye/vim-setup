@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+git pull
+git submodule init
+git submodule update
+
+cd bundle/snipMate
+git config remote.origin.pushurl git@github.com:yejianye/snipmate.vim.git
+
+cd ../textobj_function
+git config remote.origin.pushurl git@github.com:yejianye/vim-textobj-function.git

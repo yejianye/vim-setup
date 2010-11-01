@@ -4,7 +4,6 @@
 [submodule "bundle/snipMate"]
 	path = bundle/snipMate
 	url = git://github.com/yejianye/snipmate.vim.git
-	pushurl = git@github.com:yejianye/snipmate.vim.git
 [submodule "bundle/nerdcommenter"]
 	path = bundle/nerdcommenter
 	url = git://github.com/scrooloose/nerdcommenter.git
@@ -14,7 +13,6 @@
 [submodule "bundle/textobj_function"]
 	path = bundle/textobj_function
 	url = git://github.com/yejianye/vim-textobj-function.git
-	pushurl = git@github.com:yejianye/vim-textobj-function.git
 [submodule "bundle/tassert"]
 	path = bundle/tassert
 	url = git://github.com/tomtom/tassert_vim.git
