@@ -1,6 +1,8 @@
 setlocal completeopt=menuone,preview
 setlocal omnifunc=python_complete#Complete
 setlocal makeprg=python\ %
+nmap <buffer> <leader>et :call pyunit#edit_unit_test()<CR>
+nmap <buffer> <leader>rt :call pyunit#run_unit_test()<CR>
 "setlocal autoindent
 "setlocal smartindent
 "setlocal nocindent

@@ -248,6 +248,14 @@ let g:TLOG='Decho'
 "-ConqueTerm
 cab ipython ConqueTerm ipython
 
+"-Decho
+function! DechoSystem(cmd)
+	let result = system(a:cmd)
+	for line in split(result, '\n')
+		call Decho(line)
+	endfor
+endfunction
+
 "Perl Settings
 let perl_fold = 1
 let perl_nofold_packages = 1
