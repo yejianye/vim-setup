@@ -3,6 +3,7 @@ call pathogen#runtime_append_all_bundles()
 
 "===GENERAL SETTINGS===
 set t_Co=256
+set fileencodings=ucs-bom,utf-8,gbk,gb18030,gb2312,default,latin1
 if v:version < 703
 	set number
 else 
