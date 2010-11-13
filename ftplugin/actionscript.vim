@@ -33,7 +33,7 @@ function! g:GetImportString(className)
 			return
 		endif
 		if search('^\s*import ', 'b') == 0
-			search('public class', 'b')
+			call search('^\s*package', 'b')
 		endif
 		exec 'normal o' . importStatement
 		normal 'p
