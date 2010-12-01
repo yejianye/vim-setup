@@ -78,6 +78,7 @@ endif
 let mapleader = ","
 nnoremap s ;
 nnoremap S ,
+imap <C-V> <C-R>"
 imap <S-CR> <ESC>
 vmap <S-CR> <ESC>
 imap <C-B> <C-O>b
@@ -204,6 +205,8 @@ nmap <leader>cc <plug>NERDCommenterComment
 vmap <leader>cc <plug>NERDCommenterComment
 nmap <leader>cu <plug>NERDCommenterUncomment
 vmap <leader>cu <plug>NERDCommenterUncomment
+nmap <leader>cs <plug>NERDCommenterSexy
+vmap <leader>cs <plug>NERDCommenterSexy
 nmap <leader>c<space> <plug>NERDCommenterToggle
 vmap <leader>c<space> <plug>NERDCommenterToggle
 "-fuzzyFinder-
