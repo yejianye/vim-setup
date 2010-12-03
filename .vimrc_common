@@ -359,3 +359,9 @@ function! IndTxtObj(inner)
   endif
   normal! $
 endfunction
+
+"Folding
+function! SimpleFoldText()
+    return substitute(getline(v:foldstart), "{{{.*", "", "")
+endfunction
+
