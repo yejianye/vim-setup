@@ -235,6 +235,14 @@ let g:FuzzyFinderOptions.UserFile.filename = './tag_files'
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_max_list = 20
 let g:neocomplcache_plugin_disable = {'include_complete' : 1, 'filename_complete' : 1}
+let g:neocomplcache_min_syntax_length = 3
+
+"-Omni Completion
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS 
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags 
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS 
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete 
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags 
 
 "-snipMate
 nmap ,rs :call ReloadAllSnippets()<CR>
@@ -250,9 +258,10 @@ endfunction
 let g:TLOG='Decho'
 
 "-ConqueTerm
-cab ipython ConqueTerm ipython
+cnorea ipython ConqueTerm ipython
 
 "-Decho
+let g:decho_winheight=15
 function! DechoSystem(cmd)
 	let result = system(a:cmd)
 	for line in split(result, '\n')
