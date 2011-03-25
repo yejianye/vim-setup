@@ -291,23 +291,56 @@ function! s:SearchCurrentFile(pattern)
 endfunction
 
 command! -nargs=1 SmartGrep :call s:SmartGrep(<q-args>)
+command! -nargs=1 SmartReplace :call s:SmartReplace(<q-args>)
 cab sgrep SmartGrep
+cab srep SmartReplace
 nmap <leader>gr :SmartGrep <C-R>=expand('<cword>')<CR><CR>
 vmap <leader>gr "zy:SmartGrep <C-R>=getreg('z')<CR><CR>
+nmap <leader>re :SmartReplace <C-R>=expand('<cword>')<CR><CR>
+vmap <leader>re "zy:SmartReplace <C-R>=getreg('z')<CR><CR>
 let g:smartGrep_rules = []
-function! s:SmartGrep(pattern)
-	let curfile = bufname('%')
+
+function! LookupDirs(curfile)
 	let dir = "**/*." . expand("%:t:e")
 	for rule in g:smartGrep_rules
-		if curfile =~ rule[0]
+		if a:curfile =~ rule[0]
 			let dir = rule[1]
 			break
 		endif
 	endfor
-	let grepcmd = 'silent grep ' . a:pattern . ' ' . dir
+	return dir
+endfunction
+
+function! s:SmartGrep(pattern)
+	let curfile = bufname('%')
+	let grepcmd = 'silent grep ' . a:pattern . ' ' . LookupDirs(curfile)
 	exec grepcmd
 	exec 'botright cwindow'
 	exec 'redraw!'
+endfunction
+
+function! s:SmartReplace(pattern, ...)
+	let sub = a:0 > 1 ? a:1 : input("Replace '" . a:pattern . "' with: ")
+	if sub == ''
+		return
+	endif
+	exec 'wa'
+	let curfile = bufname('%')
+	let grepcmd = 'grep -nH ' . a:pattern . ' ' . LookupDirs(curfile)
+	let matches = system(grepcmd)
+	let match_list = split(matches, '\n')
+	let match_files = []
+	for i in range(len(match_list))
+		let filename = substitute(match_list[i], ':.*$', '', '')
+		if count(match_files, filename) == 0
+			call add(match_files, filename)
+		endif
+	endfor
+	let choice = input(matches . "Are you sure to replace all those occurences with '" . sub . "'(y/n)?")
+	if choice == 'y' || choice == 'Y'
+		exec 'args ' . join(match_files, ' ')
+		exec 'argdo %s/' . a:pattern . '/' . sub . '/g'
+	endif
 endfunction
 
 "hex
