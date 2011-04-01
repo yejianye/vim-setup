@@ -9,6 +9,10 @@ function! s:get_unit_test_filename()
 	return filename
 endfunction
 
+function! s:run_test(filename, pat)
+	call DechoSystem("nosetests --match='" . a:pat . "' " . a:filename)
+endfunction
+
 function! pyunit#edit_unit_test()
 	let filename = s:get_unit_test_filename()
 	if filename != ''
@@ -16,15 +20,19 @@ function! pyunit#edit_unit_test()
 	endif
 endfunction
 
-function! pyunit#run_unit_test()
+function! pyunit#run_test_file()
 	" if current buffer is a unittest file, run it directly
 	" Otherwise, find the unittest and run it
-	let errorfile = tempname()
 	if search('# *unittest:', 'w') != 0
-		call DechoSystem('python ' . s:get_unit_test_filename())
+		call s:run_test(s:get_unit_test_filename(), '^test')
 	elseif search('import unittest', 'w') != 0
-		call DechoSystem('python ' . expand('%'))
+		call s:run_test(expand('%'), '^test')
 	else
 		echo "Can't find the unit test."
 	endif
 endfunction
+
+function! pyunit#run_test_function(function_name)
+	call s:run_test(expand('%'), '^' . a:function_name . '$')
+endfunction
+

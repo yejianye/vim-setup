@@ -336,10 +336,11 @@ function! s:SmartReplace(pattern, ...)
 			call add(match_files, filename)
 		endif
 	endfor
-	let choice = input(matches . "Are you sure to replace all those occurences with '" . sub . "'(y/n)?")
-	if choice == 'y' || choice == 'Y'
+	let choice = input(matches . "Are you sure to replace all those occurences with '" . sub . "'([y]es/[n]o/[c]onfirm)?")
+	if choice == 'y' || choice == 'Y' || choice == 'c' || choice == 'C'
 		exec 'args ' . join(match_files, ' ')
-		exec 'argdo %s/' . a:pattern . '/' . sub . '/g'
+		let confirm = (choice == 'c' || choice == 'C') ? 'c' : ''
+		exec 'argdo %s/' . a:pattern . '/' . sub . '/g' . confirm
 	endif
 endfunction
 
