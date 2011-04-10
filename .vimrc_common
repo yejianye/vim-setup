@@ -280,6 +280,9 @@ inoremap <C-]> <ESC>:call g:show_func_arg()<CR>a
 nmap ,fi :call g:show_func_arg()<CR>
 nmap ,fc :call g:close_func_arg_win()<CR>
 
+"MarkedLine
+let g:marklines_noautomap=1
+
 "====USER DEFINED FUNCTION===
 command! -nargs=1 SearchCurrentFile :call s:SearchCurrentFile(<q-args>)
 nmap <leader>* :SearchCurrentFile <C-R>=expand('<cword>')<CR><CR>
