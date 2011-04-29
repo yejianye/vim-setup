@@ -282,6 +282,7 @@ nmap ,fc :call g:close_func_arg_win()<CR>
 
 "MarkedLine
 let g:marklines_noautomap=1
+cab moff 1,$MarkLinesOff
 
 "====USER DEFINED FUNCTION===
 command! -nargs=1 SearchCurrentFile :call s:SearchCurrentFile(<q-args>)
@@ -411,3 +412,23 @@ function! SimpleFoldText()
     return substitute(getline(v:foldstart), "{{{.*", "", "")
 endfunction
 
+"Javascript Tailing comma check for IE 7.0
+au! BufWritePost *.js call CheckTailComma()
+function! CheckTailComma()
+	let error_line = search(',\n*\s*}', 'w')
+	if error_line > 0
+		echo 'Tailing comma found at line ' . error_line . ' in ' . bufname('%')
+	endif
+endfunction
+
+"Paste mod
+nmap <leader>pa :call TogglePasteMode()<CR>
+function! TogglePasteMode()
+	if &paste == 1
+		let &paste = 0
+		echo 'Paste Mode Off'
+	else
+		let &paste = 1
+		echo 'Paste Mode On'
+	endif
+endfunction
