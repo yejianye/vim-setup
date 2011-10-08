@@ -120,6 +120,7 @@ nmap ,H <C-W>H
 nmap ,L <C-W>L
 nmap ,wc :bd!<cr>
 nmap ,we <C-W>=
+nmap ,wz <C-W>z
 nmap ,so :source %<CR>
 nmap ,hl :let &hlsearch=1-&hlsearch<CR>
 nmap ,ma :make<cr>
