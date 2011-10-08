@@ -16,3 +16,12 @@
 [submodule "bundle/tassert"]
 	path = bundle/tassert
 	url = git://github.com/tomtom/tassert_vim.git
+[submodule "bundle/vimproc"]
+	path = bundle/vimproc
+	url = git://github.com/Shougo/vimproc.git
+[submodule "bundle/vim-ref"]
+	path = bundle/vim-ref
+	url = git://github.com/thinca/vim-ref.git
+[submodule "bundle/vim-ref-jquery"]
+	path = bundle/vim-ref-jquery
+	url = git://github.com/yejianye/vim-ref-jquery.git

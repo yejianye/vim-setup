@@ -285,6 +285,9 @@ nmap ,fc :call g:close_func_arg_win()<CR>
 let g:marklines_noautomap=1
 cab moff 1,$MarkLinesOff
 
+"Vim-Ref
+let g:ref_jquery_path='/nail/home/rye/.vim/ref-doc/jquery'
+
 "====USER DEFINED FUNCTION===
 command! -nargs=1 SearchCurrentFile :call s:SearchCurrentFile(<q-args>)
 nmap <leader>* :SearchCurrentFile <C-R>=expand('<cword>')<CR><CR>

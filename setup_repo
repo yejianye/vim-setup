@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/bin/bash
 git pull
 git submodule init
 git submodule update
@@ -8,3 +8,15 @@ git config remote.origin.pushurl git@github.com:yejianye/snipmate.vim.git
 
 cd ../textobj_function
 git config remote.origin.pushurl git@github.com:yejianye/vim-textobj-function.git
+
+cd ../vim-ref-jquery
+git config remote.origin.pushurl git@github.com:yejianye/vim-ref-jquery.git
+
+# make vimproc
+cd bundle/vimproc
+if [[ "$OSTYPE" =~ "linux" ]]; then
+	make -f make_gcc.mak
+elif [[ "$OSTYPE" =~ "darwin" ]]; then
+	make -f make_mac.mak
+fi
+
