@@ -12,6 +12,9 @@ git config remote.origin.pushurl git@github.com:yejianye/vim-textobj-function.gi
 cd ../vim-ref-jquery
 git config remote.origin.pushurl git@github.com:yejianye/vim-ref-jquery.git
 
+cd ../jshint
+git config remote.origin.pushurl git@github.com:yejianye/jshint.vim.git
+
 # make vimproc
 cd bundle/vimproc
 if [[ "$OSTYPE" =~ "linux" ]]; then
