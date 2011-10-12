@@ -288,6 +288,9 @@ cab moff 1,$MarkLinesOff
 "Vim-Ref
 let g:ref_jquery_path=$HOME . '/.vim/ref-doc/jquery'
 
+"Quickrun
+map <unique> <Leader>qr <Plug>(quickrun)
+
 "====USER DEFINED FUNCTION===
 command! -nargs=1 SearchCurrentFile :call s:SearchCurrentFile(<q-args>)
 nmap <leader>* :SearchCurrentFile <C-R>=expand('<cword>')<CR><CR>
