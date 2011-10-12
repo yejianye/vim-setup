@@ -286,7 +286,7 @@ let g:marklines_noautomap=1
 cab moff 1,$MarkLinesOff
 
 "Vim-Ref
-let g:ref_jquery_path='/nail/home/rye/.vim/ref-doc/jquery'
+let g:ref_jquery_path=$HOME . '/.vim/ref-doc/jquery'
 
 "====USER DEFINED FUNCTION===
 command! -nargs=1 SearchCurrentFile :call s:SearchCurrentFile(<q-args>)
