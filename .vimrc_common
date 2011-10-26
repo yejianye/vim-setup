@@ -141,7 +141,7 @@ nnoremap { [{
 nnoremap } ]}
 nnoremap <C-J> 10j
 nnoremap <C-K> 10k
-nnoremap <C-]> g<C-]>
+"nnoremap <C-]> g<C-]>
 "vnoremap <C-H> (
 vnoremap <C-N> }
 vnoremap <C-P> {
