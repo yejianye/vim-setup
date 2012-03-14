@@ -31,3 +31,6 @@
 [submodule "bundle/jshint"]
 	path = bundle/jshint
 	url = git://github.com/yejianye/jshint.vim.git
+[submodule "bundle/puppet-syntax-highlight"]
+	path = bundle/puppet-syntax-highlight
+	url = https://github.com/vim-scripts/Puppet-Syntax-Highlighting.git
