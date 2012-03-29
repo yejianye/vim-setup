@@ -16,7 +16,7 @@ cd ../jshint
 git config remote.origin.pushurl git@github.com:yejianye/jshint.vim.git
 
 # make vimproc
-cd bundle/vimproc
+cd ../vimproc
 if [[ "$OSTYPE" =~ "linux" ]]; then
 	make -f make_gcc.mak
 elif [[ "$OSTYPE" =~ "darwin" ]]; then
