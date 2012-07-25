@@ -190,14 +190,14 @@ inoremap <C-E> <C-^>
 
 "====Plugin Settings=====
 "-taglist-
-let Tlist_Ctags_Cmd = "/usr/local/bin/ctags"
+let Tlist_Ctags_Cmd = "ctags"
 let Tlist_File_Fold_Auto_Close = 1
 let Tlist_Use_Right_Window = 1
 let Tlist_Show_One_File = 1
 let tlist_objc_settings = 'objc;c:class;p:protocol;m:instance method;M:class method;P:protocol'
 let tlist_actionscript_settings = 'actionscript;c:class;f:method;p:property;v:variable'
 nmap ;a :TlistToggle<CR>
-cab ct silent !/usr/bin/ctags --langmap='c++:+.cu.cuh' *
+cab ct silent !ctags --langmap='c++:+.cu.cuh' *
 "-NERDTree-
 nmap <leader>nd :NERDTreeToggle<CR>
 nmap <leader>nf :NERDTreeFind<CR>
@@ -229,7 +229,7 @@ let g:FuzzyFinderOptions.Buffer.switch_order = 10
 let g:FuzzyFinderOptions.UserFile.switch_order = 15
 let g:FuzzyFinderOptions.TagInFile.switch_order = 70
 let g:FuzzyFinderOptions.Tag.switch_order = 75 
-let g:FuzzyFinderOptions.TagInFile.ctags = '/usr/local/bin/ctags'
+let g:FuzzyFinderOptions.TagInFile.ctags = 'ctags'
 let g:FuzzyFinderOptions.UserFile.filename = './tag_files'
 
 "-neo complete

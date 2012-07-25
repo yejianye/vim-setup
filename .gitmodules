@@ -34,3 +34,6 @@
 [submodule "bundle/vim-less"]
 	path = bundle/vim-less
 	url = https://github.com/groenewege/vim-less.git
+[submodule "bundle/puppet-syntax-highlight"]
+	path = bundle/puppet-syntax-highlight
+	url = https://github.com/vim-scripts/Puppet-Syntax-Highlighting.git
