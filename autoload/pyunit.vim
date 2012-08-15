@@ -49,7 +49,7 @@ function! pyunit#run_test_file()
 	" Otherwise, find the unittest and run it
 	if search('# *unittest:', 'w') != 0
 		call s:run_test(s:get_unit_test_filename(), '^test')
-	elseif search('import unittest', 'w') != 0
+	elseif search('import unittest', 'w') != 0 || search('^def test_') != 0
 		call s:run_test(expand('%'), '^test')
 	else
 		echo "Can't find the unit test."
