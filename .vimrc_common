@@ -254,12 +254,20 @@ smap <tab>    <Plug>(neocomplcache_snippets_expand)
 "-Fugitive-
 nmap <leader>gs :Gstatus<CR>
 nmap <leader>gd :Gdiff<CR>
-nmap <leader>gc :Gcommit<CR>
+nmap <leader>gc :Gcommit -a<CR>
 nmap <leader>gb :Gblame<CR>
 nmap <leader>gl :Glog<CR>
 nmap <leader>gp :Git push<CR>
 nmap <leader>gg :Ggrep <C-R>=expand('<cword>')<CR><CR>
 vmap <leader>gg "zy:Ggrep <C-R>=getreg('z')<CR><CR>
+
+"-Tabular-
+nmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a= <ESC>:'<,'>Tabularize /=<CR>
+nmap <Leader>a: :Tabularize /:<CR>
+vmap <Leader>a: <ESC>:'<,'>Tabularize /:<CR>
+nmap <Leader>a<bar> :Tabularize /<bar><CR>
+vmap <Leader>a<bar> <ESC>:'<,'>Tabularize /<bar><CR>
 
 "-TAssert
 let g:TLOG='Decho'
