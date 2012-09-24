@@ -251,6 +251,16 @@ let g:neocomplcache_snippets_dir = expand("~/.vim/snippets")
 imap <C-l>    <Plug>(neocomplcache_snippets_expand)
 smap <tab>    <Plug>(neocomplcache_snippets_expand)
 
+"-Fugitive-
+nmap <leader>gs :Gstatus<CR>
+nmap <leader>gd :Gdiff<CR>
+nmap <leader>gc :Gcommit<CR>
+nmap <leader>gb :Gblame<CR>
+nmap <leader>gl :Glog<CR>
+nmap <leader>gp :Git push<CR>
+nmap <leader>gg :Ggrep <C-R>=expand('<cword>')<CR><CR>
+vmap <leader>gg "zy:Ggrep <C-R>=getreg('z')<CR><CR>
+
 "-TAssert
 let g:TLOG='Decho'
 
