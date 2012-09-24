@@ -1,9 +1,6 @@
 [submodule "bundle/neocomplcache"]
 	path = bundle/neocomplcache
 	url = git://github.com/Shougo/neocomplcache.git
-[submodule "bundle/snipMate"]
-	path = bundle/snipMate
-	url = git://github.com/yejianye/snipmate.vim.git
 [submodule "bundle/nerdcommenter"]
 	path = bundle/nerdcommenter
 	url = git://github.com/scrooloose/nerdcommenter.git
@@ -37,3 +34,9 @@
 [submodule "bundle/puppet-syntax-highlight"]
 	path = bundle/puppet-syntax-highlight
 	url = https://github.com/vim-scripts/Puppet-Syntax-Highlighting.git
+[submodule "bundle/neocomplcache-snippets-complete"]
+	path = bundle/neocomplcache-snippets-complete
+	url = git://github.com/Shougo/neocomplcache-snippets-complete.git
+[submodule "bundle/ctrlp"]
+	path = bundle/ctrlp
+	url = git://github.com/kien/ctrlp.vim.git

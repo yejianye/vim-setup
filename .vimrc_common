@@ -12,7 +12,6 @@ endif
 set shiftwidth=4
 set tabstop=4
 set softtabstop=4
-"set expandtab
 set backspace=2
 set statusline=\ %F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l/%L:%c
 set laststatus=2
@@ -22,13 +21,12 @@ set incsearch
 set ignorecase smartcase
 set autoindent
 set smartindent
-"set cindent
 set cinkeys=0{,0},!^F,o,O,e " default is: 0{,0},0),:,0#,!^F,o,O,e
 set iskeyword=a-z,A-Z,48-57,_
 set history=1000
 "buffer setting
 set switchbuf=useopen,usetab
-"leave a buffer with saving
+"leave a buffer without saving
 set hidden 
 set wildchar=<Tab> wildmenu wildmode=full
 :filetype plugin on 
@@ -93,45 +91,44 @@ imap <C-E> <C-O>$
 imap <C-S> <C-O>dw
 imap <C-D> <C-O>x
 inoremap # X<BS>#
-nmap ,nu :set number<CR>
-nmap ,rn :set rnu<CR>
-nmap ,xx :qa!<CR>
+nmap <leader>nu :set number<CR>
+nmap <leader>rn :set rnu<CR>
+nmap <leader>xx :qa!<CR>
 nmap j gj
 nmap k gk
-nmap ,te :tabnew<cr>
-nmap ,tc :tabclose<cr>
-nmap ,tn :tabn<cr>
-nmap ,tp :tabp<cr>
-nmap ,bn :bnext<cr>
-nmap ,bp :bprev<cr>
-nmap ,en :enew<cr>
-nmap ,, :b#<cr>
-nmap ,sb :sb#<cr>
-nmap ,vs :vertical sb#<cr>
-nmap ,wj <C-W>j
-nmap ,wk <C-W>k
-nmap ,wh <C-W>h
-nmap ,wl <C-W>l
-nmap ,w] <C-W>]
-nmap ,wg] <C-W>g]
-nmap ,J <C-W>J
-nmap ,K <C-W>K
-nmap ,H <C-W>H
-nmap ,L <C-W>L
-nmap ,wc :bd!<cr>
-nmap ,we <C-W>=
-nmap ,wz <C-W>z
-nmap ,so :source %<CR>
-nmap ,hl :let &hlsearch=1-&hlsearch<CR>
-nmap ,ma :make<cr>
-nmap ,cn :cnext<cr>
-nmap ,cp :cprev<cr>
-nmap ,cw :botright cwindow<cr>
-nmap ,cl :ccl<cr>
-nmap ,cf :cs find s <C-R>=expand("<cword>")<CR><CR>
-nmap ,@ "zyy:@z<CR>
-nmap ,ie /,\n\s*}<CR>
-"nnoremap <C-H> (
+nmap <leader>te :tabnew<cr>
+nmap <leader>tc :tabclose<cr>
+nmap <leader>tn :tabn<cr>
+nmap <leader>tp :tabp<cr>
+nmap <leader>bn :bnext<cr>
+nmap <leader>bp :bprev<cr>
+nmap <leader>en :enew<cr>
+nmap <leader>, :b#<cr>
+nmap <leader>sb :sb#<cr>
+nmap <leader>vs :vertical sb#<cr>
+nmap <leader>wj <C-W>j
+nmap <leader>wk <C-W>k
+nmap <leader>wh <C-W>h
+nmap <leader>wl <C-W>l
+nmap <leader>w] <C-W>]
+nmap <leader>wg] <C-W>g]
+nmap <leader>J <C-W>J
+nmap <leader>K <C-W>K
+nmap <leader>H <C-W>H
+nmap <leader>L <C-W>L
+nmap <leader>wc :bd!<cr>
+nmap <leader>we <C-W>=
+nmap <leader>wz <C-W>z
+nmap <leader>so :source %<CR>
+nmap <leader>hl :let &hlsearch=1-&hlsearch<CR>
+nmap <leader>ma :make<cr>
+nmap <leader>cn :cnext<cr>
+nmap <leader>cp :cprev<cr>
+nmap <leader>cw :botright cwindow<cr>
+nmap <leader>cl :ccl<cr>
+nmap <leader>cf :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <leader>@ "zyy:@z<CR>
+nmap <leader>ie /,\n\s*}<CR>
 nnoremap <C-N> }
 nnoremap <C-P> {
 nnoremap <C-L> )
@@ -141,8 +138,6 @@ nnoremap { [{
 nnoremap } ]}
 nnoremap <C-J> 10j
 nnoremap <C-K> 10k
-"nnoremap <C-]> g<C-]>
-"vnoremap <C-H> (
 vnoremap <C-N> }
 vnoremap <C-P> {
 vnoremap <C-L> )
@@ -165,9 +160,6 @@ cmap <S-CR> <C-U><ESC>
 cmap <C-V> <C-R><C-W>
 cab erc :tabe ~/.vimrc<cr>
 cab src :source ~/.vimrc<cr>
-cab sobjc source ~/.vim/mode/objc-dev.vim
-cab fhtml setf html
-cab fjs setf javascript
 cab vsb vertical sb
 cab res resize
 cab vres vertical resize
@@ -211,49 +203,26 @@ nmap <leader>cs <plug>NERDCommenterSexy
 vmap <leader>cs <plug>NERDCommenterSexy
 nmap <leader>c<space> <plug>NERDCommenterToggle
 vmap <leader>c<space> <plug>NERDCommenterToggle
-"-fuzzyFinder-
-nmap ;s :FuzzyFinderBuffer<CR>
-nmap ;d :FuzzyFinderFileWithCurrentBufferDir<CR>
-nmap ;f :FuzzyFinderUserFile<CR>
-nmap ;t :FuzzyFinderTag<CR>
-nmap ;g :let g:FuzzyFinderOptions.TagInFile.filename = expand('%')<CR>:FuzzyFinderTagInFile<CR>
-nmap ;h :FuzzyFinderBookmark<CR>
-nmap ;m :FuzzyFinderAddBookmark<CR><CR>
-if !exists("g:FuzzyFinderOptions")
-	let g:FuzzyFinderOptions = {'UserFile':{}, 'Base':{}, 'Buffer':{}, 'Tag':{}, 'TagInFile':{}}
-endif
-let g:FuzzyFinderOptions.Base.key_next_mode      = '<C-i>'
-let g:FuzzyFinderOptions.Base.key_prev_mode      = '<C-o>'
-let g:FuzzyFinderOptions.Base.enumerating_limit = 15
-let g:FuzzyFinderOptions.Buffer.switch_order = 10
-let g:FuzzyFinderOptions.UserFile.switch_order = 15
-let g:FuzzyFinderOptions.TagInFile.switch_order = 70
-let g:FuzzyFinderOptions.Tag.switch_order = 75 
-let g:FuzzyFinderOptions.TagInFile.ctags = 'ctags'
-let g:FuzzyFinderOptions.UserFile.filename = './tag_files'
 
-"-neo complete
+"-CtrlP-
+nmap ;s :CtrlPMRU<CR>
+nmap ;d :CtrlP<CR>
+nmap ;f :CtrlPBuffer<CR>
+nmap ;t :CtrlPTag<CR>
+nmap ;g :CtrlPBufTag<CR>
+nmap ;h :CtrlPClearCache<CR>
+nmap ;H :CtrlPClearAllCaches<CR>
+let g:ctrlp_extensions = ['buffertag', 'tag']
+let g:ctrlp_buftag_types = { 'objc' : '--language-force=objc' }
+
+"-Neocomplcache-
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_max_list = 20
 let g:neocomplcache_plugin_disable = {'include_complete' : 1, 'filename_complete' : 1}
 let g:neocomplcache_min_syntax_length = 3
-
-"-Omni Completion
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS 
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags 
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS 
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete 
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags 
-
-"-snipMate
-nmap ,rs :call ReloadAllSnippets()<CR>
-nmap ,es :call EditSnippet(&ft)<CR>
-
-autocmd BufWritePost *.snippets call ReloadAllSnippets()
-
-function! EditSnippet(ft)
-	exec "vsp ~/.vim/bundle/snipMate/snippets/" . a:ft . ".snippets"
-endfunction
+let g:neocomplcache_snippets_dir = expand("~/.vim/snippets")
+imap <tab>    <Plug>(neocomplcache_snippets_expand)
+smap <tab>    <Plug>(neocomplcache_snippets_expand)
 
 "-TAssert
 let g:TLOG='Decho'
@@ -280,10 +249,6 @@ let pydoc_highlight = 0
 inoremap <C-]> <ESC>:call g:show_func_arg()<CR>a
 nmap ,fi :call g:show_func_arg()<CR>
 nmap ,fc :call g:close_func_arg_win()<CR>
-
-"MarkedLine
-let g:marklines_noautomap=1
-cab moff 1,$MarkLinesOff
 
 "Vim-Ref
 let g:ref_jquery_path=$HOME . '/.vim/ref-doc/jquery'
@@ -373,59 +338,6 @@ python <<EOF
     dval = dval[::-1]
     print "val: 0x%x/%s/%g" % (val, dval, fval)
 EOF
-endfunction
-
-"indent text object
-onoremap <silent>an :<C-u>cal IndTxtObj(0)<CR>
-onoremap <silent>in :<C-u>cal IndTxtObj(1)<CR>
-vnoremap <silent>an :<C-u>cal IndTxtObj(0)<CR><Esc>gv
-vnoremap <silent>in :<C-u>cal IndTxtObj(1)<CR><Esc>gv
-
-function! IndTxtObj(inner)
-  let curline = line(".")
-  let lastline = line("$")
-  let i = indent(line(".")) - &shiftwidth * (v:count1 - 1)
-  let i = i < 0 ? 0 : i
-  if getline(".") =~ "^\\s*$"
-    return
-  endif
-  let p = line(".") - 1
-  let nextblank = getline(p) =~ "^\\s*$"
-  while p > 0 && (nextblank || indent(p) >= i )
-    -
-    let p = line(".") - 1
-    let nextblank = getline(p) =~ "^\\s*$"
-  endwhile
-  if (!a:inner)
-    -
-  endif
-  normal! 0V
-  call cursor(curline, 0)
-  let p = line(".") + 1
-  let nextblank = getline(p) =~ "^\\s*$"
-  while p <= lastline && (nextblank || indent(p) >= i )
-    +
-    let p = line(".") + 1
-    let nextblank = getline(p) =~ "^\\s*$"
-  endwhile
-  if (!a:inner)
-    +
-  endif
-  normal! $
-endfunction
-
-"Folding
-function! SimpleFoldText()
-    return substitute(getline(v:foldstart), "{{{.*", "", "")
-endfunction
-
-"Javascript Tailing comma check for IE 7.0
-au! BufWritePost *.js call CheckTailComma()
-function! CheckTailComma()
-	let error_line = search(',\n*\s*}', 'w')
-	if error_line > 0
-		echo 'Tailing comma found at line ' . error_line . ' in ' . bufname('%')
-	endif
 endfunction
 
 "Paste mod
