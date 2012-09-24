@@ -181,15 +181,42 @@ inoremap <C-E> <C-^>
 :highlight lCursor guifg=NONE guibg=Cyan
 
 "====Plugin Settings=====
-"-taglist-
-let Tlist_Ctags_Cmd = "ctags"
-let Tlist_File_Fold_Auto_Close = 1
-let Tlist_Use_Right_Window = 1
-let Tlist_Show_One_File = 1
-let tlist_objc_settings = 'objc;c:class;p:protocol;m:instance method;M:class method;P:protocol'
-let tlist_actionscript_settings = 'actionscript;c:class;f:method;p:property;v:variable'
-nmap ;a :TlistToggle<CR>
-cab ct silent !ctags --langmap='c++:+.cu.cuh' *
+"-TagBar-
+nmap <leader>tt :TagbarToggle<CR>
+nmap <leader>tj :TagbarOpen fj<CR>
+let g:tagbar_type_objc = {
+    \ 'ctagstype' : 'ObjectiveC',
+    \ 'kinds'     : [
+        \ 'i:interface',
+        \ 'I:implementation',
+        \ 'p:Protocol',
+        \ 'm:Object_method',
+        \ 'c:Class_method',
+        \ 'v:Global_variable',
+        \ 'F:Object field',
+        \ 'f:function',
+        \ 'p:property',
+        \ 't:type_alias',
+        \ 's:type_structure',
+        \ 'e:enumeration',
+        \ 'M:preprocessor_macro',
+    \ ],
+    \ 'sro'        : ' ',
+    \ 'kind2scope' : {
+        \ 'i' : 'interface',
+        \ 'I' : 'implementation',
+        \ 'p' : 'Protocol',
+        \ 's' : 'type_structure',
+        \ 'e' : 'enumeration'
+    \ },
+    \ 'scope2kind' : {
+        \ 'interface'      : 'i',
+        \ 'implementation' : 'I',
+        \ 'Protocol'       : 'p',
+        \ 'type_structure' : 's',
+        \ 'enumeration'    : 'e'
+    \ }
+\ }
 "-NERDTree-
 nmap <leader>nd :NERDTreeToggle<CR>
 nmap <leader>nf :NERDTreeFind<CR>
@@ -213,7 +240,7 @@ nmap ;g :CtrlPBufTag<CR>
 nmap ;h :CtrlPClearCache<CR>
 nmap ;H :CtrlPClearAllCaches<CR>
 let g:ctrlp_extensions = ['buffertag', 'tag']
-let g:ctrlp_buftag_types = { 'objc' : '--language-force=objc' }
+let g:ctrlp_buftag_types = { 'objc' : '--language-force=ObjectiveC' }
 
 "-Neocomplcache-
 let g:neocomplcache_enable_at_startup = 1
@@ -221,7 +248,7 @@ let g:neocomplcache_max_list = 20
 let g:neocomplcache_plugin_disable = {'include_complete' : 1, 'filename_complete' : 1}
 let g:neocomplcache_min_syntax_length = 3
 let g:neocomplcache_snippets_dir = expand("~/.vim/snippets")
-imap <tab>    <Plug>(neocomplcache_snippets_expand)
+imap <C-l>    <Plug>(neocomplcache_snippets_expand)
 smap <tab>    <Plug>(neocomplcache_snippets_expand)
 
 "-TAssert
