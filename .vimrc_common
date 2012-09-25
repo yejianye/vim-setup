@@ -232,9 +232,9 @@ nmap <leader>c<space> <plug>NERDCommenterToggle
 vmap <leader>c<space> <plug>NERDCommenterToggle
 
 "-CtrlP-
-nmap ;s :CtrlPMRU<CR>
+nmap ;s :CtrlPBuffer<CR>
 nmap ;d :CtrlP<CR>
-nmap ;f :CtrlPBuffer<CR>
+nmap ;f :CtrlPMRU<CR>
 nmap ;t :CtrlPTag<CR>
 nmap ;g :CtrlPBufTag<CR>
 nmap ;h :CtrlPClearCache<CR>
@@ -269,11 +269,14 @@ vmap <Leader>a: <ESC>:'<,'>Tabularize /:<CR>
 nmap <Leader>a<bar> :Tabularize /<bar><CR>
 vmap <Leader>a<bar> <ESC>:'<,'>Tabularize /<bar><CR>
 
-"-TAssert
-let g:TLOG='Decho'
-
 "-ConqueTerm
 cnorea ipython ConqueTerm ipython
+let g:ConqueTerm_SessionSupport = 1
+let g:ConqueTerm_InsertOnEnter = 1
+let g:ConqueTerm_CloseOnEnd = 1
+
+"-TAssert
+let g:TLOG='Decho'
 
 "-Decho
 let g:decho_winheight=15
@@ -300,6 +303,10 @@ let g:ref_jquery_path=$HOME . '/.vim/ref-doc/jquery'
 
 "Quickrun
 map <unique> <Leader>qr <Plug>(quickrun)
+
+"IPython Shell
+nmap <leader>ip :IPythonShellToggle<CR>
+nmap <leader>ij :IPythonShellFocus<CR>
 
 "====USER DEFINED FUNCTION===
 command! -nargs=1 SearchCurrentFile :call s:SearchCurrentFile(<q-args>)
