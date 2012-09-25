@@ -147,6 +147,7 @@ vnoremap { [{
 vnoremap } ]}
 vnoremap <C-J> 10j
 vnoremap <C-K> 10k
+vmap <Leader>yy <ESC>:'<,'>!pbcopy
 
 cmap <C-h> <LEFT>
 cmap <C-k> <UP>
