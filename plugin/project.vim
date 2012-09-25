@@ -1,11 +1,11 @@
-function! s:LoadProject()
+function! s:LoadProjectSettings()
     let dir=getcwd()
     while strlen(dir) > 0
-        if filereadable(dir . '/.load_project.vim')
-            exec "source ".dir. '/.load_project.vim'
+        if filereadable(dir . '/project.vim')
+            exec "source ".dir. '/project.vim'
             return
         endif
         let dir = substitute(dir, "/[^/]*$", "", "")
     endwhile
 endfunction
-call <SID>LoadProject()
+call <SID>LoadProjectSettings()

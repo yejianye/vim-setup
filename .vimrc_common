@@ -2,7 +2,7 @@
 call pathogen#runtime_append_all_bundles()
 
 "===GENERAL SETTINGS===
-set t_Co=256
+set nocompatible
 set fileencodings=ucs-bom,utf-8,gbk,gb18030,gb2312,default,latin1
 if v:version < 703
 	set number
@@ -15,6 +15,13 @@ set softtabstop=4
 set backspace=2
 set statusline=\ %F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l/%L:%c
 set laststatus=2
+" Broken down into easily includeable segments
+set statusline=%<%f\    " Filename
+set statusline+=%w%h%m%r " Options
+set statusline+=%{fugitive#statusline()} "  Git Hotness
+set statusline+=\ [%{&ff}/%Y]            " filetype
+set statusline+=\ [%{getcwd()}]          " current dir
+set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
 set ruler
 set autoread
 set incsearch
@@ -24,6 +31,7 @@ set smartindent
 set cinkeys=0{,0},!^F,o,O,e " default is: 0{,0},0),:,0#,!^F,o,O,e
 set iskeyword=a-z,A-Z,48-57,_
 set history=1000
+set conceallevel=2 concealcursor=i
 "buffer setting
 set switchbuf=useopen,usetab
 "leave a buffer without saving
@@ -39,13 +47,19 @@ if filereadable("cscope.out")
 endif
 
 "====COLOR SCHEME====
-let g:CSApprox_loaded = 1
-let g:CSApprox_verbose_level = 0
-if has("gui_running")
-    colorscheme desert
-else
-	colorscheme desert256
+if has('gui_running')
+	set guioptions-=T           " remove the toolbar
+	if has('gui_macvim')
+		set guifont=Menlo\ Regular:h13
+	endif
 endif
+set t_Co=256                 " Enable 256 colors to stop the CSApprox warning and make xterm vim shine
+set background=dark
+let g:solarized_termcolors=256
+let g:solarized_contrast="high"
+let g:solarized_visibility="high"
+color solarized
+
 
 "====FILETYPE SETTING===
 autocmd BufReadPost *
@@ -128,6 +142,7 @@ nmap <leader>cw :botright cwindow<cr>
 nmap <leader>cl :ccl<cr>
 nmap <leader>cf :cs find s <C-R>=expand("<cword>")<CR><CR>
 nmap <leader>@ "zyy:@z<CR>
+vmap <leader>@ "zyy:@z<CR>
 nmap <leader>ie /,\n\s*}<CR>
 nnoremap <C-N> }
 nnoremap <C-P> {
@@ -249,8 +264,9 @@ let g:neocomplcache_max_list = 20
 let g:neocomplcache_plugin_disable = {'include_complete' : 1, 'filename_complete' : 1}
 let g:neocomplcache_min_syntax_length = 3
 let g:neocomplcache_snippets_dir = expand("~/.vim/snippets")
-imap <C-l>    <Plug>(neocomplcache_snippets_expand)
-smap <tab>    <Plug>(neocomplcache_snippets_expand)
+imap <expr><tab> neocomplcache#sources#snippets_complete#expandable() ? "\<plug>(neocomplcache_snippets_expand)" : (pumvisible() ? "\<c-n>" : "\<tab>")
+smap <tab> <plug>(neocomplcache_snippets_jump) 
+
 
 "-Fugitive-
 nmap <leader>gs :Gstatus<CR>
