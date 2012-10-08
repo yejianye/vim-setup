@@ -1,11 +1,11 @@
-setlocal completeopt=menuone,preview
+setlocal completeopt=menuone
 setlocal makeprg=python\ %
 nmap <buffer> <leader>et :call pyunit#edit_unit_test()<CR>
 nmap <buffer> <leader>rt :call pyunit#run_test_file()<CR>
 nmap <buffer> <leader>tf :call pyunit#run_test_function('<C-R>=expand('<cword>')<CR>')<CR>
 nmap <buffer> <leader>tc :call pyunit#run_test_file_with_coverage()<CR>
-nmap <buffer> <leader>li :Pylint<CR>
-nmap <buffer> <leader>lf :PylintFull<CR>
+"nmap <buffer> <leader>li :Pylint<CR>
+"nmap <buffer> <leader>lf :PylintFull<CR>
 "setlocal autoindent
 "setlocal smartindent
 "setlocal nocindent

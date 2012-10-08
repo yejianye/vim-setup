@@ -25,9 +25,6 @@
 [submodule "bundle/quickrun"]
 	path = bundle/quickrun
 	url = git://github.com/thinca/vim-quickrun.git
-[submodule "bundle/jshint"]
-	path = bundle/jshint
-	url = git://github.com/yejianye/jshint.vim.git
 [submodule "bundle/vim-less"]
 	path = bundle/vim-less
 	url = https://github.com/groenewege/vim-less.git
@@ -55,3 +52,9 @@
 [submodule "bundle/vim-objc"]
 	path = bundle/vim-objc
 	url = git://github.com/threeve/vim-objc.git
+[submodule "bundle/syntastic"]
+	path = bundle/syntastic
+	url = git://github.com/scrooloose/syntastic.git
+[submodule "bundle/vim-coffee-script"]
+	path = bundle/vim-coffee-script
+	url = git://github.com/kchmck/vim-coffee-script.git

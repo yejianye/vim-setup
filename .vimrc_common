@@ -140,6 +140,9 @@ nmap <leader>cn :cnext<cr>
 nmap <leader>cp :cprev<cr>
 nmap <leader>cw :botright cwindow<cr>
 nmap <leader>cl :ccl<cr>
+nmap <leader>ln :lnext<cr>
+nmap <leader>lp :lprev<cr>
+nmap <leader>lw :botright lwindow<cr>
 nmap <leader>cf :cs find s <C-R>=expand("<cword>")<CR><CR>
 nmap <leader>@ "zyy:@z<CR>
 vmap <leader>@ "zyy:@z<CR>
@@ -162,7 +165,8 @@ vnoremap { [{
 vnoremap } ]}
 vnoremap <C-J> 10j
 vnoremap <C-K> 10k
-vmap <Leader>yy <ESC>:'<,'>!pbcopy
+vnoremap <leader>yy "*y
+noremap <leader>pp :set paste<CR>:put *<CR>:set nopaste<CR>
 
 cmap <C-h> <LEFT>
 cmap <C-k> <UP>
@@ -253,8 +257,8 @@ nmap ;d :CtrlP<CR>
 nmap ;f :CtrlPMRU<CR>
 nmap ;t :CtrlPTag<CR>
 nmap ;g :CtrlPBufTag<CR>
-nmap ;h :CtrlPClearCache<CR>
-nmap ;H :CtrlPClearAllCaches<CR>
+nmap ;h :CtrlPClearCache<CR>:echo 'CtrlP file cache has been cleared!'<CR>
+nmap ;H :CtrlPClearAllCaches<CR>:echo 'CtrlP cache has been cleared!'<CR> 
 let g:ctrlp_extensions = ['buffertag', 'tag']
 let g:ctrlp_buftag_types = { 'objc' : '--language-force=ObjectiveC' }
 
@@ -302,6 +306,12 @@ cnorea ipython ConqueTerm ipython
 let g:ConqueTerm_SessionSupport = 1
 let g:ConqueTerm_InsertOnEnter = 1
 let g:ConqueTerm_CloseOnEnd = 1
+
+"-Syntastic
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_python_checker_args = '-E'
+let g:syntastic_mode_map = { 'mode' : 'passive', 'active_filetypes' : ['coffee']}
+nmap <leader>li :SyntasticCheck<CR>:Errors<CR>
 
 "-TAssert
 let g:TLOG='Decho'
