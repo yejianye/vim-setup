@@ -12,6 +12,7 @@ endif
 set shiftwidth=4
 set tabstop=4
 set softtabstop=4
+set expandtab
 set backspace=2
 set statusline=\ %F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l/%L:%c
 set laststatus=2
@@ -85,6 +86,12 @@ endif
 
 if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
    set fileencodings=utf-8,latin1
+endif
+
+if has("persistent_undo")
+	set undofile
+	set undolevels=1000
+	set undoreload=10000
 endif
 
 "=====KEY MAPPING===
@@ -188,6 +195,7 @@ cab cwd lcd %:p:h
 cab cf :cs find 
 cab ses mksession! session.vim
 cab seo source session.vim
+cab suw w !sudo tee %
 
 " Insert and command-line mode Caps Lock.
 " Lock search keymap to be the same as insert mode.
@@ -310,7 +318,10 @@ let g:ConqueTerm_CloseOnEnd = 1
 "-Syntastic
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_python_checker_args = '-E'
-let g:syntastic_mode_map = { 'mode' : 'passive', 'active_filetypes' : ['coffee']}
+let g:syntastic_mode_map = {
+	\ 'mode' : 'passive',
+	\ 'active_filetypes' : ['coffee', 'less']
+\ }
 nmap <leader>li :SyntasticCheck<CR>:Errors<CR>
 
 "-TAssert
