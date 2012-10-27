@@ -276,7 +276,7 @@ let g:neocomplcache_max_list = 20
 let g:neocomplcache_plugin_disable = {'include_complete' : 1, 'filename_complete' : 1}
 let g:neocomplcache_min_syntax_length = 3
 let g:neocomplcache_auto_completion_start_length = 3
-let g:neocomplcache_snippets_dir = expand("~/.vim/snippets")
+let g:neosnippet#snippets_directory = expand("~/.vim/snippets")
 imap <expr><tab> neocomplcache#sources#snippets_complete#expandable() ? "\<plug>(neocomplcache_snippets_expand)" : (pumvisible() ? "\<c-n>" : "\<tab>")
 smap <tab> <plug>(neocomplcache_snippets_jump) 
 
