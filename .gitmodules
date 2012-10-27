@@ -31,9 +31,6 @@
 [submodule "bundle/puppet-syntax-highlight"]
 	path = bundle/puppet-syntax-highlight
 	url = https://github.com/vim-scripts/Puppet-Syntax-Highlighting.git
-[submodule "bundle/neocomplcache-snippets-complete"]
-	path = bundle/neocomplcache-snippets-complete
-	url = git://github.com/Shougo/neocomplcache-snippets-complete.git
 [submodule "bundle/ctrlp"]
 	path = bundle/ctrlp
 	url = git://github.com/kien/ctrlp.vim.git
@@ -58,3 +55,6 @@
 [submodule "bundle/vim-coffee-script"]
 	path = bundle/vim-coffee-script
 	url = git://github.com/kchmck/vim-coffee-script.git
+[submodule "bundle/neosnippet"]
+	path = bundle/neosnippet
+	url = git://github.com/Shougo/neosnippet.git
