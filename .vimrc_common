@@ -18,8 +18,8 @@ set backspace=2
 set statusline=\ %F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l/%L:%c
 set laststatus=2
 " Broken down into easily includeable segments
-set statusline=%<%f\    " Filename
-set statusline+=%w%h%m%r " Options
+set statusline=%f\    " Filename
+set statusline+=%<%w%h%m%r " Options
 set statusline+=%{fugitive#statusline()} "  Git Hotness
 set statusline+=\ [%{&ff}/%Y]            " filetype
 set statusline+=\ [%{getcwd()}]          " current dir
