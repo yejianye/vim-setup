@@ -310,7 +310,6 @@ vmap <Leader>a<bar> <ESC>:'<,'>Tabularize /<bar><CR>
 
 "-ConqueTerm
 cnorea ipython ConqueTerm ipython
-let g:ConqueTerm_SendVisKey = '<Leader>s'
 let g:ConqueTerm_SessionSupport = 1
 let g:ConqueTerm_InsertOnEnter = 1
 let g:ConqueTerm_CloseOnEnd = 1
@@ -356,6 +355,7 @@ map <unique> <Leader>qr <Plug>(quickrun)
 "IPython Shell
 nmap <leader>ip :IPythonShellToggle<CR>
 nmap <leader>ij :IPythonShellFocus<CR>
+vmap <leader>is <esc>:IPythonShellSendText<CR>
 
 "====USER DEFINED FUNCTION===
 command! -nargs=1 SearchCurrentFile :call s:SearchCurrentFile(<q-args>)
