@@ -310,6 +310,7 @@ vmap <Leader>a<bar> <ESC>:'<,'>Tabularize /<bar><CR>
 
 "-ConqueTerm
 cnorea ipython ConqueTerm ipython
+let g:ConqueTerm_SendVisKey = '<Leader>s'
 let g:ConqueTerm_SessionSupport = 1
 let g:ConqueTerm_InsertOnEnter = 1
 let g:ConqueTerm_CloseOnEnd = 1

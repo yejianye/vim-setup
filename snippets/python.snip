@@ -1,0 +1,5 @@
+snippet oswalk
+abbr for...in os.walk(...)
+options head
+    for root, dirs, files in os.walk(${1:#:dir}):
+        ${0}
