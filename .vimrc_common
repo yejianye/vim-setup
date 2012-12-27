@@ -1,5 +1,9 @@
 "Pathogen needs to loaded before any other plugins and settings
 call pathogen#runtime_append_all_bundles()
+"===OS Detection===
+if !exists('g:macos')
+    let g:macos=has('mac') || executable('pbcopy')
+endif
 
 "===GENERAL SETTINGS===
 set nocompatible
@@ -51,6 +55,8 @@ endif
 "====COLOR SCHEME====
 if has('gui_running')
 	set guioptions-=T           " remove the toolbar
+	set guioptions-=L           " remove the scrollbar
+	set guioptions-=r           " remove the scrollbar
 	if has('gui_macvim')
 		set guifont=Source\ Code\ Pro\ Light:h12
 	endif
@@ -173,14 +179,6 @@ vnoremap { [{
 vnoremap } ]}
 vnoremap <C-J> 10j
 vnoremap <C-K> 10k
-if executable('pbcopy')
-    vnoremap <leader>yy <ESC>:silent '<,'>w !pbcopy<CR>
-    noremap <leader>pp :read !pbpaste<CR>
-else
-    vnoremap <leader>yy "*y
-    noremap <leader>pp :set paste<CR>:put *<CR>:set nopaste<CR>
-endif
-
 cmap <C-h> <LEFT>
 cmap <C-k> <UP>
 cmap <C-j> <DOWN>
@@ -264,8 +262,8 @@ nmap <leader>c<space> <plug>NERDCommenterToggle
 vmap <leader>c<space> <plug>NERDCommenterToggle
 
 "-CtrlP-
+let g:ctrlp_map = ';d'
 nmap ;s :CtrlPBuffer<CR>
-nmap ;d :CtrlP<CR>
 nmap ;f :CtrlPMRU<CR>
 nmap ;t :CtrlPTag<CR>
 nmap ;g :CtrlPBufTag<CR>
@@ -461,3 +459,17 @@ endfunction
 "fix input method conflict
 au InsertEnter * set noimd
 au InsertLeave * set imd
+
+"smart open
+if g:macos
+    nnoremap <leader>op :silent !open '<C-R>=expand('<cWORD>')<CR>'<CR>
+endif
+
+if g:macos
+    vnoremap <leader>yy <ESC>:silent '<,'>w !pbcopy<CR>
+    noremap <leader>pp :read !pbpaste<CR>
+else
+    vnoremap <leader>yy "*y
+    noremap <leader>pp :set paste<CR>:put *<CR>:set nopaste<CR>
+endif
+
