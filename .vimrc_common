@@ -52,7 +52,7 @@ endif
 if has('gui_running')
 	set guioptions-=T           " remove the toolbar
 	if has('gui_macvim')
-		set guifont=Menlo\ Regular:h13
+		set guifont=Source\ Code\ Pro\ Light:h12
 	endif
 endif
 set t_Co=256                 " Enable 256 colors to stop the CSApprox warning and make xterm vim shine
@@ -173,8 +173,13 @@ vnoremap { [{
 vnoremap } ]}
 vnoremap <C-J> 10j
 vnoremap <C-K> 10k
-vnoremap <leader>yy "*y
-noremap <leader>pp :set paste<CR>:put *<CR>:set nopaste<CR>
+if executable('pbcopy')
+    vnoremap <leader>yy <ESC>:silent '<,'>w !pbcopy<CR>
+    noremap <leader>pp :read !pbpaste<CR>
+else
+    vnoremap <leader>yy "*y
+    noremap <leader>pp :set paste<CR>:put *<CR>:set nopaste<CR>
+endif
 
 cmap <C-h> <LEFT>
 cmap <C-k> <UP>
@@ -452,3 +457,7 @@ function! TogglePasteMode()
 		echo 'Paste Mode On'
 	endif
 endfunction
+
+"fix input method conflict
+au InsertEnter * set noimd
+au InsertLeave * set imd
