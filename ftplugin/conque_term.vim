@@ -1,8 +1,8 @@
 function! ConqueTermBindPasteKey(term)
-    inoremap <buffer> <C-V> <esc>:call PasteFromSystemClipboard()<CR>
+    inoremap <buffer> <C-V> <esc>:call <SID>PasteFromSystemClipboard()<CR>
 endfunction
 
-function! PasteFromSystemClipboard()
+function! s:PasteFromSystemClipboard()
     let terminal=conque_term#get_instance()
     call terminal.write(@*)
     startinsert

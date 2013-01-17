@@ -263,13 +263,14 @@ vmap <leader>c<space> <plug>NERDCommenterToggle
 
 "-CtrlP-
 let g:ctrlp_map = ';d'
+nmap ;a :CtrlPMixed<CR>
 nmap ;s :CtrlPBuffer<CR>
 nmap ;f :CtrlPMRU<CR>
 nmap ;t :CtrlPTag<CR>
 nmap ;g :CtrlPBufTag<CR>
 nmap ;h :CtrlPClearCache<CR>:echo 'CtrlP file cache has been cleared!'<CR>
 nmap ;H :CtrlPClearAllCaches<CR>:echo 'CtrlP cache has been cleared!'<CR> 
-let g:ctrlp_extensions = ['buffertag', 'tag']
+let g:ctrlp_extensions = ['buffertag', 'tag', 'mixed']
 let g:ctrlp_buftag_types = { 'objc' : '--language-force=ObjectiveC' }
 
 "-Neocomplcache-
@@ -279,6 +280,10 @@ let g:neocomplcache_plugin_disable = {'include_complete' : 1, 'filename_complete
 let g:neocomplcache_min_syntax_length = 3
 let g:neocomplcache_auto_completion_start_length = 3
 let g:neosnippet#snippets_directory = expand("~/.vim/snippets")
+if !exists('g:neocomplcache_omni_functions')
+    let g:neocomplcache_omni_functions = {}
+endif
+let g:neocomplcache_omni_functions.python = 'CompleteIPython'
 imap <expr><tab> neocomplcache#sources#snippets_complete#expandable() ? "\<plug>(neocomplcache_snippets_expand)" : (pumvisible() ? "\<c-n>" : "\<tab>")
 smap <tab> <plug>(neocomplcache_snippets_jump) 
 
@@ -312,7 +317,6 @@ nmap <Leader>a<bar> :Tabularize /<bar><CR>
 vmap <Leader>a<bar> <ESC>:'<,'>Tabularize /<bar><CR>
 
 "-ConqueTerm
-cnorea ipython ConqueTerm ipython
 let g:ConqueTerm_SessionSupport = 1
 let g:ConqueTerm_InsertOnEnter = 1
 let g:ConqueTerm_CloseOnEnd = 1
@@ -359,6 +363,7 @@ map <unique> <Leader>qr <Plug>(quickrun)
 nmap <leader>ip :IPythonShellToggle<CR>
 nmap <leader>ij :IPythonShellFocus<CR>
 vmap <leader>is <esc>:IPythonShellSendText<CR>
+let g:ipy_completefunc = ''
 
 "====USER DEFINED FUNCTION===
 command! -nargs=1 SearchCurrentFile :call s:SearchCurrentFile(<q-args>)
@@ -463,6 +468,7 @@ au InsertLeave * set imd
 "smart open
 if g:macos
     nnoremap <leader>op :silent !open '<C-R>=expand('<cWORD>')<CR>'<CR>
+    vnoremap <leader>op "zy:silent !open '<C-R>=getreg('z')<CR>'<CR>
 endif
 
 if g:macos
