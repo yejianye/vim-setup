@@ -1,5 +1,48 @@
 snippet oswalk
 abbr for...in os.walk(...)
 options head
-    for root, dirs, files in os.walk(${1:#:dir}):
-        ${0}
+    for root, dirs, files in os.walk(${1:dir}):
+        ${2}
+
+snippet argh
+abbr @arg(...)
+options head
+    @arg('${1:--xyz}', '${2:-x}', default='${3}', help='${4}')
+    def ${5:func}(args):
+        ${6}
+
+snippet setup
+abbr setuptools.setup(...)
+options head
+    setuptools.setup(
+        name="${1:package-name}",
+        version='0.1.0',
+        license="MIT",
+
+        author="Ryan Ye",
+        author_email="yejianye@gmail.com",
+        url="https://github.com/yejianye/$1",
+
+        description="${2:description}",
+        long_description=open("README.md").read(),
+        keywords=[${3}],
+        classifiers=[
+                "Environment :: Console",
+                "Development Status :: 3 - Alpha",
+                "Programming Language :: Python",
+                "Programming Language :: Python :: 2.7",
+                "Intended Audience :: Developers",
+                "License :: OSI Approved :: MIT License",
+                "Natural Language :: English",
+                "Operating System :: OS Independent",
+                "Environment :: Other Environment",
+                "Topic :: Utilities",
+            ],
+        entry_points={
+            'console_scripts': [
+                '${4:script-name} = $1.$4:script-name}:main',
+            ]
+        },
+        install_requires=[${5}],
+        packages=['$1'],
+    )
