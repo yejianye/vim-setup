@@ -157,6 +157,7 @@ nmap <leader>cl :ccl<cr>
 nmap <leader>ln :lnext<cr>
 nmap <leader>lp :lprev<cr>
 nmap <leader>lw :botright lwindow<cr>
+nmap <leader>lc :lclose<cr>
 nmap <leader>cf :cs find s <C-R>=expand("<cword>")<CR><CR>
 nmap <leader>@ "zyy:@z<CR>
 vmap <leader>@ "zyy:@z<CR>
@@ -322,7 +323,8 @@ let g:ConqueTerm_InsertOnEnter = 1
 let g:ConqueTerm_CloseOnEnd = 1
 
 "-Syntastic
-let g:syntastic_auto_loc_list = 0
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_jump = 1
 let g:syntastic_python_checker_args = '-E'
 let g:syntastic_mode_map = {
 	\ 'mode' : 'passive',
