@@ -199,6 +199,7 @@ cab cf :cs find
 cab ses mksession! session.vim
 cab seo source session.vim
 cab suw w !sudo tee %
+cab erc e ~/.vim/.vimrc_common
 
 " Insert and command-line mode Caps Lock.
 " Lock search keymap to be the same as insert mode.
@@ -284,20 +285,29 @@ let g:neosnippet#snippets_directory = expand("~/.vim/snippets")
 if !exists('g:neocomplcache_omni_functions')
     let g:neocomplcache_omni_functions = {}
 endif
-let g:neocomplcache_omni_functions.python = 'CompleteIPython'
+let g:neocomplcache_omni_functions.python = 'python_complete#Complete'
+
+if !exists('g:neocomplcache_force_omni_patterns')
+    let g:neocomplcache_force_omni_patterns = {}
+endif
 imap <expr><tab> neocomplcache#sources#snippets_complete#expandable() ? "\<plug>(neocomplcache_snippets_expand)" : (pumvisible() ? "\<c-n>" : "\<tab>")
 smap <tab> <plug>(neocomplcache_snippets_jump) 
 
-" Disable omnicomplete in Objc
+" Make Neocomplache and clang_complete play together
 if !exists('g:neocomplcache_force_omni_patterns')
 	let g:neocomplcache_force_omni_patterns = {}
 endif
-let g:neocomplcache_force_omni_patterns.objc = '____' 
-
-if !exists('g:neocomplcache_omni_patterns')
-	let g:neocomplcache_omni_patterns = {}
-endif
-let g:neocomplcache_omni_patterns.objc = '' 
+let g:neocomplcache_force_overwrite_completefunc = 1
+let g:neocomplcache_force_omni_patterns.c ='[^.[:digit:] *\t]\%(\.\|->\)'
+let g:neocomplcache_force_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+let g:neocomplcache_force_omni_patterns.objc = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+let g:neocomplcache_force_omni_patterns.objcpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+let g:clang_complete_auto = 0
+let g:clang_auto_select = 0
+let g:clang_use_library = 1
+let g:clang_periodic_quickfix = 0
+let g:clang_snippets = 1
+let g:clang_close_preview = 1
 
 "-Fugitive-
 nmap <leader>gs :Gstatus<CR>
