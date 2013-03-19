@@ -169,8 +169,8 @@ nnoremap ( [(
 nnoremap ) ])
 nnoremap { [{
 nnoremap } ]}
-nnoremap <C-J> 10j
-nnoremap <C-K> 10k
+nnoremap <C-J> 5j
+nnoremap <C-K> 5k
 vnoremap <C-N> }
 vnoremap <C-P> {
 vnoremap <C-L> )
@@ -178,8 +178,8 @@ vnoremap ( [(
 vnoremap ) ])
 vnoremap { [{
 vnoremap } ]}
-vnoremap <C-J> 10j
-vnoremap <C-K> 10k
+vnoremap <C-J> 5j
+vnoremap <C-K> 5k
 cmap <C-h> <LEFT>
 cmap <C-k> <UP>
 cmap <C-j> <DOWN>
@@ -200,14 +200,6 @@ cab ses mksession! session.vim
 cab seo source session.vim
 cab suw w !sudo tee %
 cab erc e ~/.vim/.vimrc_common
-
-" Insert and command-line mode Caps Lock.
-" Lock search keymap to be the same as insert mode.
-set imsearch=-1
-" Load the keymap that acts like capslock.
-set keymap=insert-only_capslock
-set iminsert=0
-inoremap <C-E> <C-^>
 
 :highlight Cursor guifg=NONE guibg=Green
 :highlight lCursor guifg=NONE guibg=Cyan
@@ -274,7 +266,7 @@ nmap ;g :CtrlPBufTag<CR>
 nmap ;h :CtrlPClearCache<CR>:echo 'CtrlP file cache has been cleared!'<CR>
 nmap ;H :CtrlPClearAllCaches<CR>:echo 'CtrlP cache has been cleared!'<CR> 
 let g:ctrlp_extensions = ['buffertag', 'tag', 'mixed']
-let g:ctrlp_buftag_types = { 'objc' : '--language-force=ObjectiveC' }
+let g:ctrlp_buftag_types = { 'objc' : {'bin' : '/Users/ryan/bin/objctags', 'args' : '-f -'}}
 
 "-Neocomplcache-
 let g:neocomplcache_enable_at_startup = 1
@@ -288,27 +280,29 @@ if !exists('g:neocomplcache_omni_functions')
 endif
 let g:neocomplcache_omni_functions.python = 'python_complete#Complete'
 
+" Make Neocomplache and clang_complete play together
 if !exists('g:neocomplcache_force_omni_patterns')
     let g:neocomplcache_force_omni_patterns = {}
 endif
-imap <expr><tab> neocomplcache#sources#snippets_complete#expandable() ? "\<plug>(neocomplcache_snippets_expand)" : (pumvisible() ? "\<c-n>" : "\<tab>")
-smap <tab> <plug>(neocomplcache_snippets_jump) 
-
-" Make Neocomplache and clang_complete play together
-if !exists('g:neocomplcache_force_omni_patterns')
-	let g:neocomplcache_force_omni_patterns = {}
-endif
 let g:neocomplcache_force_overwrite_completefunc = 1
-let g:neocomplcache_force_omni_patterns.c ='[^.[:digit:] *\t]\%(\.\|->\)'
-let g:neocomplcache_force_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-let g:neocomplcache_force_omni_patterns.objc = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-let g:neocomplcache_force_omni_patterns.objcpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+let g:neocomplcache_force_omni_patterns.objc = '_____'
+if !exists('g:neocomplcache_omni_patterns')
+    let g:neocomplcache_omni_patterns = {}
+endif
+let g:neocomplcache_omni_patterns.objc = '_____'
+"let g:neocomplcache_force_omni_patterns.c ='[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplcache_force_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+"let g:neocomplcache_force_omni_patterns.objc = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+"let g:neocomplcache_force_omni_patterns.objcpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 let g:clang_complete_auto = 0
 let g:clang_auto_select = 0
 let g:clang_use_library = 1
 let g:clang_periodic_quickfix = 0
 let g:clang_snippets = 1
 let g:clang_close_preview = 1
+
+imap <expr><tab> neocomplcache#sources#snippets_complete#expandable() ? "\<plug>(neocomplcache_snippets_expand)" : (pumvisible() ? "\<c-n>" : "\<tab>")
+smap <tab> <plug>(neocomplcache_snippets_jump) 
 
 "-Fugitive-
 nmap <leader>gs :Gstatus<CR>
@@ -334,8 +328,8 @@ let g:ConqueTerm_InsertOnEnter = 1
 let g:ConqueTerm_CloseOnEnd = 1
 
 "-Syntastic
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_auto_jump = 1
+let g:syntastic_auto_loc_list = 2
+let g:syntastic_auto_jump = 0
 let g:syntastic_python_checker_args = '-E'
 let g:syntastic_mode_map = {
 	\ 'mode' : 'passive',
@@ -350,6 +344,7 @@ let g:TLOG='Decho'
 
 "-Decho
 let g:decho_winheight=15
+let g:dechomode=3
 function! DechoSystem(cmd)
 	let result = system(a:cmd)
 	for line in split(result, '\n')
@@ -364,9 +359,9 @@ let perl_nofold_packages = 1
 "Python Settings
 let pydoc_highlight = 0
 
-inoremap <C-]> <ESC>:call g:show_func_arg()<CR>a
-nmap ,fi :call g:show_func_arg()<CR>
-nmap ,fc :call g:close_func_arg_win()<CR>
+"inoremap <C-]> <ESC>:call g:show_func_arg()<CR>a
+"nmap ,fi :call g:show_func_arg()<CR>
+"nmap ,fc :call g:close_func_arg_win()<CR>
 
 "Vim-Ref
 let g:ref_jquery_path=$HOME . '/.vim/ref-doc/jquery'
@@ -479,6 +474,17 @@ endfunction
 "fix input method conflict
 au InsertEnter * set noimd
 au InsertLeave * set imd
+
+
+" Insert and command-line mode Caps Lock.
+" Lock search keymap to be the same as insert mode.
+set imsearch=-1
+" Load the keymap that acts like capslock.
+set keymap=insert-only_capslock
+set iminsert=0
+inoremap <C-E> <C-^>
+
+au InsertLeave * set iminsert=0
 
 "smart open
 if g:macos
