@@ -3,7 +3,6 @@ if exists("b:do_c_init")
 endif
 let b:do_c_init = 1
 
-setlocal number
 setlocal autoindent
 setlocal smartindent
 setlocal cindent
