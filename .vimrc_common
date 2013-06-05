@@ -19,12 +19,11 @@ set tabstop=4
 set softtabstop=4
 set expandtab
 set backspace=2
-set statusline=\ %F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l/%L:%c
 set laststatus=2
 " Broken down into easily includeable segments
 set statusline=%f\    " Filename
-set statusline+=%<%w%h%m%r " Options
-set statusline+=%{fugitive#statusline()} "  Git Hotness
+set statusline+=%w%h%m%r " Options
+set statusline+=%<%{fugitive#statusline()} "  Git Hotness
 set statusline+=\ [%{&ff}/%Y]            " filetype
 set statusline+=\ [%{getcwd()}]          " current dir
 set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
@@ -334,9 +333,10 @@ let g:ConqueTerm_InsertOnEnter = 1
 let g:ConqueTerm_CloseOnEnd = 1
 
 "-Syntastic
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_loc_list = 0
 let g:syntastic_auto_jump = 1
-let g:syntastic_python_checker_args = '-E'
+let g:syntastic_python_checkers = ['pylint']
+let g:syntastic_python_pylint_args = '-f parseable -r n -i y -E'
 let g:syntastic_mode_map = {
 	\ 'mode' : 'passive',
 	\ 'active_filetypes' : ['coffee', 'less']
