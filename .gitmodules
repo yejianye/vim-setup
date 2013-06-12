@@ -67,4 +67,3 @@
 [submodule "bundle/vim-objc"]
 	path = bundle/vim-objc
 	url = https://github.com/b4winckler/vim-objc.git
->>>>>>> 46bfffdb836c8c39a35d1809c35bf91474d14dd2
