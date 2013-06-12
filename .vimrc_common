@@ -19,12 +19,11 @@ set tabstop=4
 set softtabstop=4
 set expandtab
 set backspace=2
-set statusline=\ %F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l/%L:%c
 set laststatus=2
 " Broken down into easily includeable segments
 set statusline=%f\    " Filename
-set statusline+=%<%w%h%m%r " Options
-set statusline+=%{fugitive#statusline()} "  Git Hotness
+set statusline+=%w%h%m%r " Options
+set statusline+=%<%{fugitive#statusline()} "  Git Hotness
 set statusline+=\ [%{&ff}/%Y]            " filetype
 set statusline+=\ [%{getcwd()}]          " current dir
 set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
@@ -157,6 +156,7 @@ nmap <leader>cl :ccl<cr>
 nmap <leader>ln :lnext<cr>
 nmap <leader>lp :lprev<cr>
 nmap <leader>lw :botright lwindow<cr>
+nmap <leader>lc :lclose<cr>
 nmap <leader>cf :cs find s <C-R>=expand("<cword>")<CR><CR>
 nmap <leader>@ "zyy:@z<CR>
 vmap <leader>@ "zyy:@z<CR>
@@ -168,8 +168,8 @@ nnoremap ( [(
 nnoremap ) ])
 nnoremap { [{
 nnoremap } ]}
-nnoremap <C-J> 10j
-nnoremap <C-K> 10k
+nnoremap <C-J> 5j
+nnoremap <C-K> 5k
 vnoremap <C-N> }
 vnoremap <C-P> {
 vnoremap <C-L> )
@@ -177,8 +177,8 @@ vnoremap ( [(
 vnoremap ) ])
 vnoremap { [{
 vnoremap } ]}
-vnoremap <C-J> 10j
-vnoremap <C-K> 10k
+vnoremap <C-J> 5j
+vnoremap <C-K> 5k
 cmap <C-h> <LEFT>
 cmap <C-k> <UP>
 cmap <C-j> <DOWN>
@@ -198,14 +198,7 @@ cab cf :cs find
 cab ses mksession! session.vim
 cab seo source session.vim
 cab suw w !sudo tee %
-
-" Insert and command-line mode Caps Lock.
-" Lock search keymap to be the same as insert mode.
-set imsearch=-1
-" Load the keymap that acts like capslock.
-set keymap=insert-only_capslock
-set iminsert=0
-inoremap <C-E> <C-^>
+cab erc e ~/.vim/.vimrc_common
 
 :highlight Cursor guifg=NONE guibg=Green
 :highlight lCursor guifg=NONE guibg=Cyan
@@ -266,13 +259,13 @@ let g:ctrlp_map = ';d'
 nmap ;a :CtrlPMixed<CR>
 nmap ;s :CtrlPBuffer<CR>
 nmap ;f :CtrlPMRU<CR>
-nmap ;r :CtrlP <C-R>=expand('%:h')<CR><CR>
+nmap ;r :CtrlP <C-R>=expand('%:p:h')<CR><CR>
 nmap ;t :CtrlPTag<CR>
 nmap ;g :CtrlPBufTag<CR>
 nmap ;h :CtrlPClearCache<CR>:echo 'CtrlP file cache has been cleared!'<CR>
 nmap ;H :CtrlPClearAllCaches<CR>:echo 'CtrlP cache has been cleared!'<CR> 
 let g:ctrlp_extensions = ['buffertag', 'tag', 'mixed']
-let g:ctrlp_buftag_types = { 'objc' : '--language-force=ObjectiveC' }
+let g:ctrlp_buftag_types = { 'objc' : {'bin' : '/Users/ryan/bin/objctags', 'args' : '-f -'}}
 
 "-Neocomplcache-
 let g:neocomplcache_enable_at_startup = 1
@@ -284,20 +277,31 @@ let g:neosnippet#snippets_directory = expand("~/.vim/snippets")
 if !exists('g:neocomplcache_omni_functions')
     let g:neocomplcache_omni_functions = {}
 endif
-let g:neocomplcache_omni_functions.python = 'CompleteIPython'
+let g:neocomplcache_omni_functions.python = 'python_complete#Complete'
+
+" Make Neocomplache and clang_complete play together
+if !exists('g:neocomplcache_force_omni_patterns')
+    let g:neocomplcache_force_omni_patterns = {}
+endif
+let g:neocomplcache_force_overwrite_completefunc = 1
+let g:neocomplcache_force_omni_patterns.objc = '_____'
+if !exists('g:neocomplcache_omni_patterns')
+    let g:neocomplcache_omni_patterns = {}
+endif
+let g:neocomplcache_omni_patterns.objc = '_____'
+"let g:neocomplcache_force_omni_patterns.c ='[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplcache_force_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+"let g:neocomplcache_force_omni_patterns.objc = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+"let g:neocomplcache_force_omni_patterns.objcpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+let g:clang_complete_auto = 0
+let g:clang_auto_select = 0
+let g:clang_use_library = 1
+let g:clang_periodic_quickfix = 0
+let g:clang_snippets = 1
+let g:clang_close_preview = 1
+
 imap <expr><tab> neocomplcache#sources#snippets_complete#expandable() ? "\<plug>(neocomplcache_snippets_expand)" : (pumvisible() ? "\<c-n>" : "\<tab>")
 smap <tab> <plug>(neocomplcache_snippets_jump) 
-
-" Disable omnicomplete in Objc
-if !exists('g:neocomplcache_force_omni_patterns')
-	let g:neocomplcache_force_omni_patterns = {}
-endif
-let g:neocomplcache_force_omni_patterns.objc = '____' 
-
-if !exists('g:neocomplcache_omni_patterns')
-	let g:neocomplcache_omni_patterns = {}
-endif
-let g:neocomplcache_omni_patterns.objc = '' 
 
 "-Fugitive-
 nmap <leader>gs :Gstatus<CR>
@@ -324,18 +328,23 @@ let g:ConqueTerm_CloseOnEnd = 1
 
 "-Syntastic
 let g:syntastic_auto_loc_list = 0
-let g:syntastic_python_checker_args = '-E'
+let g:syntastic_auto_jump = 1
+let g:syntastic_python_checkers = ['pylint']
+let g:syntastic_python_pylint_args = '-f parseable -r n -i y -E'
 let g:syntastic_mode_map = {
 	\ 'mode' : 'passive',
 	\ 'active_filetypes' : ['coffee', 'less']
 \ }
 nmap <leader>li :SyntasticCheck<CR>:Errors<CR>
+let g:syntastic_objc_checker = 'clang'
+let g:syntastic_objc_config_file = '.clang_complete'
 
 "-TAssert
 let g:TLOG='Decho'
 
 "-Decho
 let g:decho_winheight=15
+let g:dechomode=3
 function! DechoSystem(cmd)
 	let result = system(a:cmd)
 	for line in split(result, '\n')
@@ -350,9 +359,9 @@ let perl_nofold_packages = 1
 "Python Settings
 let pydoc_highlight = 0
 
-inoremap <C-]> <ESC>:call g:show_func_arg()<CR>a
-nmap ,fi :call g:show_func_arg()<CR>
-nmap ,fc :call g:close_func_arg_win()<CR>
+"inoremap <C-]> <ESC>:call g:show_func_arg()<CR>a
+"nmap ,fi :call g:show_func_arg()<CR>
+"nmap ,fc :call g:close_func_arg_win()<CR>
 
 "Vim-Ref
 let g:ref_jquery_path=$HOME . '/.vim/ref-doc/jquery'
@@ -466,17 +475,23 @@ endfunction
 au InsertEnter * set noimd
 au InsertLeave * set imd
 
+
+" Insert and command-line mode Caps Lock.
+" Lock search keymap to be the same as insert mode.
+set imsearch=-1
+" Load the keymap that acts like capslock.
+set keymap=insert-only_capslock
+set iminsert=0
+inoremap <C-E> <C-^>
+
+au InsertLeave * set iminsert=0
+
 "smart open
 if g:macos
     nnoremap <leader>op :silent !open '<C-R>=expand('<cWORD>')<CR>'<CR>
     vnoremap <leader>op "zy:silent !open '<C-R>=getreg('z')<CR>'<CR>
 endif
 
-if g:macos
-    vnoremap <leader>yy <ESC>:silent '<,'>w !pbcopy<CR>
-    noremap <leader>pp :read !pbpaste<CR>
-else
-    vnoremap <leader>yy "*y
-    noremap <leader>pp :set paste<CR>:put *<CR>:set nopaste<CR>
-endif
+vnoremap <leader>yy "*y
+noremap <leader>pp :set paste<CR>:put *<CR>:set nopaste<CR>
 

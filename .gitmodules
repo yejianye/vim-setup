@@ -46,12 +46,9 @@
 [submodule "bundle/vim-colors-solarized"]
 	path = bundle/vim-colors-solarized
 	url = git://github.com/altercation/vim-colors-solarized.git
-[submodule "bundle/vim-objc"]
-	path = bundle/vim-objc
-	url = git://github.com/threeve/vim-objc.git
 [submodule "bundle/syntastic"]
 	path = bundle/syntastic
-	url = git://github.com/scrooloose/syntastic.git
+    url = git://github.com/yejianye/syntastic.git
 [submodule "bundle/vim-coffee-script"]
 	path = bundle/vim-coffee-script
 	url = git://github.com/kchmck/vim-coffee-script.git
@@ -61,3 +58,13 @@
 [submodule "bundle/vim-jinja2"]
 	path = bundle/vim-jinja2
 	url = git@github.com:Glench/Vim-Jinja2-Syntax.git
+[submodule "bundle/vim-ios"]
+	path = bundle/vim-ios
+	url = https://github.com/eraserhd/vim-ios.git
+[submodule "bundle/clang_complete"]
+	path = bundle/clang_complete
+	url = https://github.com/Rip-Rip/clang_complete
+[submodule "bundle/vim-objc"]
+	path = bundle/vim-objc
+	url = https://github.com/b4winckler/vim-objc.git
+>>>>>>> 46bfffdb836c8c39a35d1809c35bf91474d14dd2
