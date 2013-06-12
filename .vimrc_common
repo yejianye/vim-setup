@@ -266,6 +266,7 @@ let g:ctrlp_map = ';d'
 nmap ;a :CtrlPMixed<CR>
 nmap ;s :CtrlPBuffer<CR>
 nmap ;f :CtrlPMRU<CR>
+nmap ;r :CtrlP <C-R>=expand('%:h')<CR><CR>
 nmap ;t :CtrlPTag<CR>
 nmap ;g :CtrlPBufTag<CR>
 nmap ;h :CtrlPClearCache<CR>:echo 'CtrlP file cache has been cleared!'<CR>
