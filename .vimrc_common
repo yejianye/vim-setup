@@ -37,6 +37,7 @@ set smartindent
 set cinkeys=0{,0},!^F,o,O,e " default is: 0{,0},0),:,0#,!^F,o,O,e
 set iskeyword=a-z,A-Z,48-57,_
 set history=1000
+set undolevels=1000
 set conceallevel=2 concealcursor=i
 "buffer setting
 set switchbuf=useopen,usetab
@@ -93,12 +94,6 @@ endif
 
 if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
    set fileencodings=utf-8,latin1
-endif
-
-if has("persistent_undo")
-	set undofile
-	set undolevels=1000
-	set undoreload=10000
 endif
 
 "=====KEY MAPPING===
