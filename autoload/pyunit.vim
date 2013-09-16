@@ -10,7 +10,10 @@ function! s:get_unit_test_filename()
 endfunction
 
 function! s:run_test(filename, pattern)
-	call DechoSystem("nosetests --match='" . a:pattern . "' " . a:filename)
+    if !exists('g:pyunit_nose_exe')
+        let g:pyunit_nose_exe = 'nosetests'
+    endif
+    call DechoSystem(g:pyunit_nose_exe . " --match='" . a:pattern . "' " . a:filename)
 endfunction
 
 "Name            Stmts   Miss  Cover   Missing

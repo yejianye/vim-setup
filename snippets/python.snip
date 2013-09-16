@@ -46,3 +46,29 @@ options head
         install_requires=[${5}],
         packages=['$1'],
     )
+
+snippet     strftime
+abbr        time.strftime(...)
+options     head
+    time.strftime('%Y%m%d', ${1:#:date}.timetuple())
+
+snippet     email
+abbr        smtp.sendemail...
+options     head
+    import smtplib
+
+    sender = 'from@fromdomain.com'
+    receivers = ['to@todomain.com']
+
+    message = """From: From Person <from@fromdomain.com>
+    To: To Person <to@todomain.com>
+    Subject: SMTP e-mail test
+
+    This is a test e-mail message.
+    """
+
+    try:
+       smtp = smtplib.SMTP('localhost')
+       smtp.sendmail(sender, receivers, message)         
+    except SMTPException:
+       print "Error: unable to send email" 
