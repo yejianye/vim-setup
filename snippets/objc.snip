@@ -1,0 +1,11 @@
+snippet     forin
+abbr        for (obj in container)...
+options     head
+    for (${1:NSObject *}${2:obj} in ${3:container}) {
+        ${4}
+    }
+
+snippet     nslog
+abbr        NSLog(...)
+options     head
+    NSLog(${1});
