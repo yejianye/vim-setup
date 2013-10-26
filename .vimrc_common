@@ -259,6 +259,7 @@ nmap ;t :CtrlPTag<CR>
 nmap ;g :CtrlPBufTag<CR>
 nmap ;h :CtrlPClearCache<CR>:echo 'CtrlP file cache has been cleared!'<CR>
 nmap ;H :CtrlPClearAllCaches<CR>:echo 'CtrlP cache has been cleared!'<CR> 
+nmap ;c :CtrlPCmdPalette<CR>
 let g:ctrlp_extensions = ['buffertag', 'tag', 'mixed']
 let g:ctrlp_buftag_types = { 'objc' : {'bin' : 'objctags.py', 'args' : ''}}
 
