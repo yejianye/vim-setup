@@ -327,7 +327,7 @@ let g:ConqueTerm_CloseOnEnd = 1
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_auto_jump = 1
 let g:syntastic_python_checkers = ['pylint']
-let g:syntastic_python_pylint_args = '-f parseable -r n -i y -E'
+let g:syntastic_python_pylint_args = "-E --msg-template='{path}:{line}: [{msg_id}({symbol}), {obj}] {msg}' -r n"
 let g:syntastic_mode_map = {
 	\ 'mode' : 'passive',
 	\ 'active_filetypes' : ['coffee', 'less']
