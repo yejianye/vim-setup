@@ -1,11 +1,10 @@
 "Pathogen needs to loaded before any other plugins and settings
 call pathogen#runtime_append_all_bundles()
-"===OS Detection===
+
+"{{{===GENERAL SETTINGS===
 if !exists('g:macos')
     let g:macos=has('mac') || executable('pbcopy')
 endif
-
-"===GENERAL SETTINGS===
 set nocompatible
 set nowritebackup
 set fileencodings=ucs-bom,utf-8,gbk,gb18030,gb2312,default,latin1
@@ -20,6 +19,7 @@ set softtabstop=4
 set expandtab
 set backspace=2
 set laststatus=2
+set sessionoptions=blank,buffers,curdir,folds,help,localoptions,tabpages,winsize
 " Broken down into easily includeable segments
 set statusline=%f\    " Filename
 set statusline+=%w%h%m%r " Options
@@ -38,6 +38,7 @@ set iskeyword=a-z,A-Z,48-57,_
 set history=1000
 set undolevels=1000
 set conceallevel=2 concealcursor=i
+
 "buffer setting
 set switchbuf=useopen,usetab
 "leave a buffer without saving
@@ -52,7 +53,21 @@ if filereadable("cscope.out")
     cs add cscope.out
 endif
 
-"====COLOR SCHEME====
+"fix input method conflict
+au InsertEnter * set noimd
+au InsertLeave * set imd
+" Insert and command-line mode Caps Lock.
+" Lock search keymap to be the same as insert mode.
+set imsearch=-1
+" Load the keymap that acts like capslock.
+set keymap=insert-only_capslock
+set iminsert=0
+
+au InsertLeave * set iminsert=0
+
+:highlight Cursor guifg=NONE guibg=Green
+:highlight lCursor guifg=NONE guibg=Cyan
+
 if has('gui_running')
 	set guioptions-=T           " remove the toolbar
 	set guioptions-=L           " remove the scrollbar
@@ -68,19 +83,19 @@ let g:solarized_contrast="high"
 let g:solarized_visibility="high"
 color solarized
 
-
-"====FILETYPE SETTING===
+"}}}
+"===FILETYPE SETTING=== {{{
 autocmd BufReadPost *
 \ if line("'\"") > 0 && line ("'\"") <= line("$") |
 \   exe "normal g'\"" |
 \ endif
 
-autocmd BufRead *.cu setf cpp 
-autocmd BufRead *.cuh setf cpp 
-autocmd BufRead *.m setf objc
-autocmd BufRead *.doctest setf python
+autocmd BufNewFile,BufRead *.cu setf cpp 
+autocmd BufNewFile,BufRead *.cuh setf cpp 
+autocmd BufNewFile,BufRead *.m setf objc
+autocmd BufNewFile,BufRead *.doctest setf python
 autocmd BufNewFile,BufRead *.as setf actionscript
-
+autocmd BufNewFile,BufRead *.md setf markdown
 
 autocmd BufWritePost *.sh silent !chmod +x %
 autocmd BufWritePost *.pl silent !chmod +x %
@@ -95,7 +110,13 @@ if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
    set fileencodings=utf-8,latin1
 endif
 
-"=====KEY MAPPING===
+"html settings
+let g:html_indent_script1 = "inc" 
+let g:html_indent_style1 = "inc" 
+let g:html_indent_inctags = "html,body,head" 
+
+" }}}
+"===KEY MAPPING=== {{{
 let mapleader = ","
 nnoremap s ;
 nnoremap S ,
@@ -113,6 +134,7 @@ imap <C-E> <C-O>$
 imap <C-S> <C-O>dw
 imap <C-D> <C-O>x
 inoremap # X<BS>#
+inoremap <C-E> <C-^>
 nmap <leader>nu :set number<CR>
 nmap <leader>rn :set rnu<CR>
 nmap <leader>xx :qa!<CR>
@@ -195,10 +217,24 @@ cab seo source session.vim
 cab suw w !sudo tee %
 cab erc e ~/.vim/.vimrc_common
 
-:highlight Cursor guifg=NONE guibg=Green
-:highlight lCursor guifg=NONE guibg=Cyan
+"smart open
+if g:macos
+    nnoremap <leader>op :silent !open '<C-R>=expand('<cWORD>')<CR>'<CR>
+    vnoremap <leader>op "zy:silent !open '<C-R>=getreg('z')<CR>'<CR>
+endif
 
-"====Plugin Settings=====
+vnoremap <leader>yy "*y
+noremap <leader>pp :set paste<CR>:put *<CR>:set nopaste<CR>
+" }}}
+"===PLUGIN SETTINGS=== {{{
+"-Dash-
+nmap <leader>D <Plug>DashSearch
+vmap <leader>D "zy:Dash <C-R>=getreg('z')<CR><CR>
+let g:dash_map = {
+    \ 'objc'       : 'iphoneos',
+    \ 'python'     : 'python2',
+    \ }
+
 "-TagBar-
 nmap <leader>tt :TagbarToggle<CR>
 nmap <leader>tj :TagbarOpen fj<CR>
@@ -235,9 +271,11 @@ let g:tagbar_type_objc = {
         \ 'enumeration'    : 'e'
     \ }
 \ }
+
 "-NERDTree-
 nmap <leader>nd :NERDTreeToggle<CR>
 nmap <leader>nf :NERDTreeFind<CR>
+
 "-NERDCommenter-
 let g:NERDCreateDefaultMappings = 0
 nmap <leader>cc <plug>NERDCommenterComment
@@ -356,10 +394,6 @@ let perl_nofold_packages = 1
 "Python Settings
 let pydoc_highlight = 0
 
-"inoremap <C-]> <ESC>:call g:show_func_arg()<CR>a
-"nmap ,fi :call g:show_func_arg()<CR>
-"nmap ,fc :call g:close_func_arg_win()<CR>
-
 "Vim-Ref
 let g:ref_jquery_path=$HOME . '/.vim/ref-doc/jquery'
 
@@ -372,7 +406,8 @@ nmap <leader>ij :IPythonShellFocus<CR>
 vmap <leader>is <esc>:IPythonShellSendText<CR>
 let g:ipy_completefunc = ''
 
-"====USER DEFINED FUNCTION===
+" }}}
+"===COMMANDS & FUNCS=== {{{
 command! -nargs=1 SearchCurrentFile :call s:SearchCurrentFile(<q-args>)
 nmap <leader>* :SearchCurrentFile <C-R>=expand('<cword>')<CR><CR>
 vmap <leader>* "zy:SearchCurrentFile <C-R>=getreg('z')<CR><CR>
@@ -467,28 +502,6 @@ function! TogglePasteMode()
 		echo 'Paste Mode On'
 	endif
 endfunction
+" }}}
 
-"fix input method conflict
-au InsertEnter * set noimd
-au InsertLeave * set imd
-
-
-" Insert and command-line mode Caps Lock.
-" Lock search keymap to be the same as insert mode.
-set imsearch=-1
-" Load the keymap that acts like capslock.
-set keymap=insert-only_capslock
-set iminsert=0
-inoremap <C-E> <C-^>
-
-au InsertLeave * set iminsert=0
-
-"smart open
-if g:macos
-    nnoremap <leader>op :silent !open '<C-R>=expand('<cWORD>')<CR>'<CR>
-    vnoremap <leader>op "zy:silent !open '<C-R>=getreg('z')<CR>'<CR>
-endif
-
-vnoremap <leader>yy "*y
-noremap <leader>pp :set paste<CR>:put *<CR>:set nopaste<CR>
-
+" vim: foldmethod=marker
