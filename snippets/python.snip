@@ -1,3 +1,9 @@
+snippet snip.ifmain
+abbr if __name__ ...
+options indent
+    if __name__ == '__main__':
+        ${1}
+
 snippet snip.oswalk
 abbr for...in os.walk(...)
 options head
@@ -6,7 +12,7 @@ options head
 
 snippet snip.argh
 abbr @arg(...)
-options head
+options indent
     from argh import arg, dispatch_command
 
     @dispatch_command
@@ -16,7 +22,7 @@ options head
 
 snippet snip.setup
 abbr setuptools.setup(...)
-options head indent
+options indent
     setuptools.setup(
         name="${1:package-name}",
         version='0.1.0',
@@ -52,12 +58,11 @@ options head indent
 
 snippet     snip.strftime
 abbr        time.strftime(...)
-options     head
     time.strftime('%Y%m%d', ${1:#:date}.timetuple())
 
 snippet     snip.email
 abbr        smtp.sendemail...
-options     head
+options     indent
     import smtplib
 
     sender = 'from@fromdomain.com'

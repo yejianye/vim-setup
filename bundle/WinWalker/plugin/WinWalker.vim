@@ -4010,7 +4010,7 @@ endfunction
 
 
 function! WinWalker_help_init()
-	nnoremap <buffer> <silent> <c-]> :call WinWalker_help_tag_trap( "\<c-]>" )<CR>
+	nnoremap <buffer> <silent> <c-]> :call WinWalker_help_tag_trap( "\\<c-]>" )<CR>
 	" I don't understand this magic:  why does \\<  work for special keys, and
 	" \<  doesn't.  There are some other weird side effects, but it seems to
 	" work.
