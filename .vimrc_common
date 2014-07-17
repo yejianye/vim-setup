@@ -406,6 +406,12 @@ nmap <leader>ij :IPythonShellFocus<CR>
 vmap <leader>is <esc>:IPythonShellSendText<CR>
 let g:ipy_completefunc = ''
 
+"Obvious Resize
+noremap <silent> <leader>wK :ObviousResizeUp 5<CR>
+noremap <silent> <leader>wJ :ObviousResizeDown 5<CR>
+noremap <silent> <leader>wH :ObviousResizeLeft 5<CR>
+noremap <silent> <leader>wL :ObviousResizeRight 5<CR>
+
 " }}}
 "===COMMANDS & FUNCS=== {{{
 command! -nargs=1 SearchCurrentFile :call s:SearchCurrentFile(<q-args>)

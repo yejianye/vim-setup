@@ -79,3 +79,9 @@
 [submodule "bundle/vim-instant-markdown"]
 	path = bundle/vim-instant-markdown
 	url = git@github.com:suan/vim-instant-markdown.git
+[submodule "bundle/vim-windowswap"]
+	path = bundle/vim-windowswap
+	url = git@github.com:wesQ3/vim-windowswap.git
+[submodule "bundle/obvious-resize"]
+	path = bundle/obvious-resize
+	url = git@github.com:yejianye/obvious-resize.git
