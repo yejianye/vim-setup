@@ -10,15 +10,14 @@ options head
     for root, dirs, files in os.walk(${1:dir}):
         ${2}
 
-snippet snip.argh
-abbr @arg(...)
+snippet snip.arg
+abbr argparse.ArgumentParser
 options indent
-    from argh import arg, dispatch_command
-
-    @dispatch_command
-    @arg('${1:--xyz}', default='${3}', help='${4}')
-    def ${5:func}(args):
-        ${6}
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--prod-db", action="store_true", help="Export production DB")
+    parser.add_argument("--logdb", action="store_true", help="Export logging DB (only the past day)")
+    args = parser.parse_args()
 
 snippet snip.setup
 abbr setuptools.setup(...)
@@ -60,6 +59,10 @@ snippet     snip.strftime
 abbr        time.strftime(...)
     time.strftime('%Y%m%d', ${1:#:date}.timetuple())
 
+snippet     snip.mktime
+abbr        time.mktime(...)       
+    time.mktime(${1:dateobj}.timetuple())
+
 snippet     snip.email
 abbr        smtp.sendemail...
 options     indent
@@ -94,3 +97,4 @@ options     indent
 			return retcode, output, err_output,
 		else:
 			return retcode, output
+
