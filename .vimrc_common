@@ -90,15 +90,8 @@ autocmd BufReadPost *
 \   exe "normal g'\"" |
 \ endif
 
-autocmd BufNewFile,BufRead *.cu setf cpp 
-autocmd BufNewFile,BufRead *.cuh setf cpp 
-autocmd BufNewFile,BufRead *.m setf objc
-autocmd BufNewFile,BufRead *.doctest setf python
-autocmd BufNewFile,BufRead *.as setf actionscript
-autocmd BufNewFile,BufRead *.md setf markdown
-
-autocmd BufWritePost *.sh silent !chmod +x %
-autocmd BufWritePost *.pl silent !chmod +x %
+autocmd! BufWritePost *.sh silent !chmod +x %
+autocmd! BufWritePost *.pl silent !chmod +x %
 
 if &term=="xterm"
      set t_Co=8
@@ -238,39 +231,6 @@ let g:dash_map = {
 "-TagBar-
 nmap <leader>tt :TagbarToggle<CR>
 nmap <leader>tj :TagbarOpen fj<CR>
-let g:tagbar_type_objc = {
-    \ 'ctagstype' : 'ObjectiveC',
-    \ 'kinds'     : [
-        \ 'i:interface',
-        \ 'I:implementation',
-        \ 'p:Protocol',
-        \ 'm:Object_method',
-        \ 'c:Class_method',
-        \ 'v:Global_variable',
-        \ 'F:Object field',
-        \ 'f:function',
-        \ 'p:property',
-        \ 't:type_alias',
-        \ 's:type_structure',
-        \ 'e:enumeration',
-        \ 'M:preprocessor_macro',
-    \ ],
-    \ 'sro'        : ' ',
-    \ 'kind2scope' : {
-        \ 'i' : 'interface',
-        \ 'I' : 'implementation',
-        \ 'p' : 'Protocol',
-        \ 's' : 'type_structure',
-        \ 'e' : 'enumeration'
-    \ },
-    \ 'scope2kind' : {
-        \ 'interface'      : 'i',
-        \ 'implementation' : 'I',
-        \ 'Protocol'       : 'p',
-        \ 'type_structure' : 's',
-        \ 'enumeration'    : 'e'
-    \ }
-\ }
 
 "-NERDTree-
 nmap <leader>nd :NERDTreeToggle<CR>
