@@ -260,6 +260,7 @@ nmap ;H :CtrlPClearAllCaches<CR>:echo 'CtrlP cache has been cleared!'<CR>
 nmap ;c :CtrlPCmdPalette<CR>
 let g:ctrlp_extensions = ['buffertag', 'tag', 'mixed']
 let g:ctrlp_buftag_types = { 'objc' : {'bin' : 'objctags.py', 'args' : ''}}
+let g:ctrlp_root_markers = ['.ctrlp_root']
 
 "-Neocomplcache-
 let g:neocomplcache_enable_at_startup = 1
