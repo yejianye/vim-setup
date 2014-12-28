@@ -324,15 +324,15 @@ let g:ConqueTerm_InsertOnEnter = 1
 let g:ConqueTerm_CloseOnEnd = 1
 
 "-Syntastic
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_auto_jump = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_jump = 0
 let g:syntastic_python_checkers = ['pylint']
 let g:syntastic_python_pylint_args = "-E --msg-template='{path}:{line}: [{msg_id}({symbol}), {obj}] {msg}' -r n"
 let g:syntastic_mode_map = {
 	\ 'mode' : 'passive',
 	\ 'active_filetypes' : ['coffee', 'less']
 \ }
-nmap <leader>li :SyntasticCheck<CR>:Errors<CR>
+nmap <leader>li :SyntasticCheck<CR>
 let g:syntastic_objc_checker = 'clang'
 let g:syntastic_objc_config_file = '.clang_complete'
 
