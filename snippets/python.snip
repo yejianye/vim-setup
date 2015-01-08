@@ -15,7 +15,7 @@ abbr argparse.ArgumentParser
 options indent
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument("--prod-db", action="store_true", help="Export production DB")
+    parser.add_argument("--prod-db", default='emma', help="Export production DB")
     parser.add_argument("--logdb", action="store_true", help="Export logging DB (only the past day)")
     args = parser.parse_args()
 
@@ -98,3 +98,8 @@ options     indent
 		else:
 			return retcode, output
 
+snippet     snip.logging
+abbr        logging.basicConfig(...)
+options     indent
+    import logging
+    logging.basicConfig(filename='${1:filename}', format='%(asctime)s %(message)s', level=logging.INFO)
