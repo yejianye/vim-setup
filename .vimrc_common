@@ -260,6 +260,7 @@ nmap ;H :CtrlPClearAllCaches<CR>:echo 'CtrlP cache has been cleared!'<CR>
 nmap ;c :CtrlPCmdPalette<CR>
 let g:ctrlp_extensions = ['buffertag', 'tag', 'mixed']
 let g:ctrlp_buftag_types = { 'objc' : {'bin' : 'objctags.py', 'args' : ''}}
+let g:ctrlp_root_markers = ['.ctrlp_root']
 
 "-Neocomplcache-
 let g:neocomplcache_enable_at_startup = 1
@@ -323,15 +324,15 @@ let g:ConqueTerm_InsertOnEnter = 1
 let g:ConqueTerm_CloseOnEnd = 1
 
 "-Syntastic
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_auto_jump = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_jump = 0
 let g:syntastic_python_checkers = ['pylint']
 let g:syntastic_python_pylint_args = "-E --msg-template='{path}:{line}: [{msg_id}({symbol}), {obj}] {msg}' -r n"
 let g:syntastic_mode_map = {
 	\ 'mode' : 'passive',
 	\ 'active_filetypes' : ['coffee', 'less']
 \ }
-nmap <leader>li :SyntasticCheck<CR>:Errors<CR>
+nmap <leader>li :SyntasticCheck<CR>
 let g:syntastic_objc_checker = 'clang'
 let g:syntastic_objc_config_file = '.clang_complete'
 
