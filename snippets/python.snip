@@ -14,7 +14,7 @@ snippet snip.arg
 abbr argparse.ArgumentParser
 options indent
     import argparse
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--prod-db", default='emma', help="Export production DB")
     parser.add_argument("--logdb", action="store_true", help="Export logging DB (only the past day)")
     args = parser.parse_args()
@@ -103,3 +103,19 @@ abbr        logging.basicConfig(...)
 options     indent
     import logging
     logging.basicConfig(filename='${1:filename}', format='%(asctime)s %(message)s', level=logging.INFO)
+
+snippet     snip.daterange
+abbr        daterange
+options     indent
+	def daterange(start_date, end_date):
+		''' Return a list of date strings between start_date and end_date
+		All dates are in format of YYYY/MM/DD
+		'''
+		start_date = datetime.date(*map(int, start_date.split('/')))
+		end_date = datetime.date(*map(int, end_date.split('/')))
+		dates = []
+		d = start_date
+		while d <= end_date:
+			dates.append('%04d/%02d/%02d' % (d.year, d.month, d.day))
+			d += datetime.timedelta(days=1)
+		return dates

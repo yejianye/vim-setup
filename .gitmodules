@@ -85,3 +85,6 @@
 [submodule "bundle/obvious-resize"]
 	path = bundle/obvious-resize
 	url = git@github.com:yejianye/obvious-resize.git
+[submodule "bundle/nimrod"]
+	path = bundle/nimrod
+	url = git@github.com:zah/nimrod.vim.git
