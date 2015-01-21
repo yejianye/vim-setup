@@ -216,7 +216,9 @@ if g:macos
     vnoremap <leader>op "zy:silent !open '<C-R>=getreg('z')<CR>'<CR>
 endif
 
-vnoremap <leader>yy "*y
+"Copy text to Mac clipboard, even in ssh session
+"This only works with clipper (https://github.com/wincent/clipper)
+vnoremap <leader>yy "xy<ESC>:call system('nc localhost 8377', @x)<CR>
 noremap <leader>pp :set paste<CR>:put *<CR>:set nopaste<CR>
 " }}}
 "===PLUGIN SETTINGS=== {{{

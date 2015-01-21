@@ -102,7 +102,7 @@ snippet     snip.logging
 abbr        logging.basicConfig(...)
 options     indent
     import logging
-    logging.basicConfig(filename='${1:filename}', format='%(asctime)s %(message)s', level=logging.INFO)
+    logging.basicConfig(filename='${1:filename}', format='[%(asctime)s] [%(levelname)s] %(message)s', level=logging.INFO)
 
 snippet     snip.daterange
 abbr        daterange
