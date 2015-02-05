@@ -88,3 +88,6 @@
 [submodule "bundle/nimrod"]
 	path = bundle/nimrod
 	url = git@github.com:zah/nimrod.vim.git
+[submodule "bundle/vim-ansible-yaml"]
+	path = bundle/vim-ansible-yaml
+	url = git://github.com/chase/vim-ansible-yaml.git
