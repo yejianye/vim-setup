@@ -1,25 +1,25 @@
-snippet snip.ifmain
+snippet snip_ifmain
 abbr if __name__ ...
 options indent
     if __name__ == '__main__':
         ${1}
 
-snippet snip.oswalk
+snippet snip_oswalk
 abbr for...in os.walk(...)
 options head
     for root, dirs, files in os.walk(${1:dir}):
         ${2}
 
-snippet snip.arg
+snippet snip_arg
 abbr argparse.ArgumentParser
 options indent
     import argparse
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
     parser.add_argument("--prod-db", default='emma', help="Export production DB")
     parser.add_argument("--logdb", action="store_true", help="Export logging DB (only the past day)")
     args = parser.parse_args()
 
-snippet snip.setup
+snippet snip_setup
 abbr setuptools.setup(...)
 options indent
     setuptools.setup(
@@ -55,15 +55,15 @@ options indent
         packages=['$1'],
     )
 
-snippet     snip.strftime
+snippet     snip_strftime
 abbr        time.strftime(...)
     time.strftime('%Y%m%d', ${1:#:date}.timetuple())
 
-snippet     snip.mktime
+snippet     snip_mktime
 abbr        time.mktime(...)       
     time.mktime(${1:dateobj}.timetuple())
 
-snippet     snip.email
+snippet     snip_email
 abbr        smtp.sendemail...
 options     indent
     import smtplib
@@ -84,7 +84,7 @@ options     indent
     except SMTPException:
        print "Error: unable to send email" 
 
-snippet     snip.shell_command
+snippet     snip_shell_command
 abbr        def shell_command(command, ...)
 options     indent
 	import subprocess
@@ -98,13 +98,13 @@ options     indent
 		else:
 			return retcode, output
 
-snippet     snip.logging
+snippet     snip_logging
 abbr        logging.basicConfig(...)
 options     indent
     import logging
     logging.basicConfig(filename='${1:filename}', format='[%(asctime)s] [%(levelname)s] %(message)s', level=logging.INFO)
 
-snippet     snip.daterange
+snippet     snip_daterange
 abbr        daterange
 options     indent
 	def daterange(start_date, end_date):
