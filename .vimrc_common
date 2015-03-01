@@ -274,7 +274,6 @@ let g:neosnippet#snippets_directory = expand("~/.vim/snippets")
 if !exists('g:neocomplcache_omni_functions')
     let g:neocomplcache_omni_functions = {}
 endif
-let g:neocomplcache_omni_functions.python = 'python_complete#Complete'
 
 " Make Neocomplache and clang_complete play together
 if !exists('g:neocomplcache_force_omni_patterns')
@@ -299,7 +298,7 @@ let g:clang_snippets = 1
 let g:clang_close_preview = 1
 let g:clang_library_path = '/usr/lib'
 
-" jedi-vim integration
+" Integrate jedi with Neocomplache
 autocmd FileType python setlocal omnifunc=jedi#completions
 let g:jedi#completions_enabled = 0
 let g:jedi#auto_vim_configuration = 0
